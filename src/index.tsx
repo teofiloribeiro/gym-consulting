@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import Login from './pages/Login';
+import NotFound from './pages/NotFound';
+import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import StartMenu from './pages/StartMenu';
+
+ReactDOM.render(  
+  <BrowserRouter>
+    <Switch>
+      <Route path="/" exact= {true} component={Login}/>
+      <Route path="/start_menu" exact= {true} component={StartMenu}/>
+      <Route path="/register" exact= {true} component={Register}/>
+      <Route path="/forgot_password" exact= {true} component={ForgotPassword}/>
+      <Route path="*" component={NotFound}/>
+    </Switch>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
