@@ -1,3 +1,22 @@
 .cardContainer{
     margin-top: 15% !important;
 }
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body, #root{
+    min-height: 100%;
+  }
+  
+  body{
+    background: url('../components/assets/imagemFundo.jpg') no-repeat center center;
+    background-size: cover;
+  }
+
+
+

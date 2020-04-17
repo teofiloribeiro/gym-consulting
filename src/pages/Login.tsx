@@ -5,6 +5,8 @@ import { Grid } from '@material-ui/core';
 import LoginCard from '../components/LoginCard';
 import { Redirect } from 'react-router-dom';
 
+
+
 export default class Login extends Component {
     state = {
         user: '',
@@ -31,19 +33,21 @@ export default class Login extends Component {
             return <Redirect to="/start_menu" />
         }
         return (
-            <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-                className="cardContainer">
-                <Grid item xs={12} md={6} lg={4} >
-                    <LoginCard user={this.state.user} password={this.state.password}
-                        onUserHandleChange={this.onUserHandleChange}
-                        onPasswordHandleChange={this.onPasswordHandleChange}
-                        onSubmit={this.onSubmit} />
+            <div className="bg-login">
+                <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className="cardContainer">
+                    <Grid item xs={12} md={6} lg={4} >
+                        <LoginCard user={this.state.user} password={this.state.password}
+                            onUserHandleChange={this.onUserHandleChange}
+                            onPasswordHandleChange={this.onPasswordHandleChange}
+                            onSubmit={this.onSubmit} />
+                    </Grid>
                 </Grid>
-            </Grid>
+            </div>
         );
     }
 }
