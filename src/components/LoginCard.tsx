@@ -10,7 +10,7 @@ const LoginCard = (props: any) => {
 
     return (
         <Card >
-            <CardContent >
+            <CardContent className="cardContainer">
                 <Grid container
                     direction="column"
                     justify="center"
