@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import StartMenuCard from '../components/StartMenuCard'
 import { Redirect } from 'react-router-dom';
 
+import dietImg from '../components/assets/diet.jpg';
+import traningImg from '../components/assets/training.jpg';
+import nutricionistaImg from '../components/assets/nutricionista.jpg';
+import medidaImg from '../components/assets/medidas.jpg';
+import { Grid } from '@material-ui/core';
+
+import "./StartMenu.scss"
 
 export default class StartMenu extends Component {
     state = {
@@ -17,7 +24,7 @@ export default class StartMenu extends Component {
     }
 
     onSubmit = () => {
-        this.setState({ gotoStartPage: true });
+        this.setState({ gotoDietPage: true });
     }
 
     render() {
@@ -31,7 +38,54 @@ export default class StartMenu extends Component {
             return <Redirect to="/Nutricionist" />
         }
         return (
-                <StartMenuCard onSubmit={this.onSubmit} />
+
+            <Grid  className="cardContainerStartMenu"
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                 > 
+
+                <StartMenuCard
+                title={"Dieta"}
+                img={dietImg}
+                description={"Uma boa dieta e treinos trazem melhores resultados, além de fazer bem a saúde."}
+                onSubmit={this.onSubmit} />
+
+            <StartMenuCard
+                title={"Treino"}
+                img={traningImg}
+                description={"Os treinos são essenciais para a saúde,perda de gordura e o guanho de massa magra."}
+                onSubmit={this.onSubmit} />
+
+                
+            <StartMenuCard
+                title={"Nutritionista"}
+                img={nutricionistaImg}
+                description={"O nutricionista elabora uma dieta que atenda a sua necessidade. Para resultados mais rápido e seguro."}
+                onSubmit={this.onSubmit} />
+
+                
+            <StartMenuCard
+                title={"Dieta"}
+                img={medidaImg}
+                description={"Uma boa dieta e treinos trazem melhores resultados, além de fazer bem a saúde."}
+                onSubmit={this.onSubmit} />
+
+                
+            <StartMenuCard
+                title={"Dieta"}
+                img={dietImg}
+                description={"Uma boa dieta e treinos trazem melhores resultados, além de fazer bem a saúde."}
+                onSubmit={this.onSubmit} />
+                
+            <StartMenuCard
+                title={"Dieta"}
+                img={dietImg}
+                description={"Uma boa dieta e treinos trazem melhores resultados, além de fazer bem a saúde."}
+                onSubmit={this.onSubmit} />
+
+            </Grid>
         )
     }
 }
