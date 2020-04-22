@@ -39,10 +39,10 @@ export default class StartMenu extends Component {
         }
         return (
 
-            <Grid  className="cardContainerStartMenu"
+            <Grid className="cardContainerStartMenu"
                 container
                 direction="row"
-                justify="center"
+                justify="space-evenly"
                 alignItems="center"
                  > 
 
@@ -60,31 +60,17 @@ export default class StartMenu extends Component {
 
                 
             <StartMenuCard
-                title={"Nutritionista"}
+                title={"Nutricionista"}
                 img={nutricionistaImg}
                 description={"O nutricionista elabora uma dieta que atenda a sua necessidade. Para resultados mais rápido e seguro."}
                 onSubmit={this.onSubmit} />
 
                 
             <StartMenuCard
-                title={"Dieta"}
+                title={"Medida"}
                 img={medidaImg}
                 description={"Uma boa dieta e treinos trazem melhores resultados, além de fazer bem a saúde."}
                 onSubmit={this.onSubmit} />
-
-                
-            <StartMenuCard
-                title={"Dieta"}
-                img={dietImg}
-                description={"Uma boa dieta e treinos trazem melhores resultados, além de fazer bem a saúde."}
-                onSubmit={this.onSubmit} />
-                
-            <StartMenuCard
-                title={"Dieta"}
-                img={dietImg}
-                description={"Uma boa dieta e treinos trazem melhores resultados, além de fazer bem a saúde."}
-                onSubmit={this.onSubmit} />
-
             </Grid>
         )
     }
