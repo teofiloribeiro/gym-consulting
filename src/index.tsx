@@ -9,9 +9,13 @@ import NotFound from './pages/NotFound';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import StartMenu from './pages/StartMenu';
+import AppBar from './components/AppBar';
+import { useLocation } from 'react-router-dom'
 
-ReactDOM.render(  
+
+ReactDOM.render(
   <BrowserRouter>
+    <AppBar/>
     <Switch>
       <Route path="/" exact= {true} component={Login}/>
       <Route path="/start_menu" exact= {true} component={StartMenu}/>
@@ -22,6 +26,8 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 );
+
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
