@@ -15,7 +15,8 @@ const useStyle = makeStyles({
         maxWidth: 300,
         marginRight: 0,
         maxHeight: 400,
-        minHeight: 400
+        minHeight: 400,
+        marginBottom: 5
     },
     botton: {
         marginBottom: 5,
