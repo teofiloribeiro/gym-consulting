@@ -10,20 +10,22 @@ import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import StartMenu from './pages/StartMenu';
 import AppBar from './components/AppBar';
-import { useLocation } from 'react-router-dom'
+import { AuthProvider } from './auth/AuthContext';
 
 
 ReactDOM.render(
-  <BrowserRouter>
-    <AppBar/>
-    <Switch>
-      <Route path="/" exact= {true} component={Login}/>
-      <Route path="/start_menu" exact= {true} component={StartMenu}/>
-      <Route path="/register" exact= {true} component={Register}/>
-      <Route path="/forgot_password" exact= {true} component={ForgotPassword}/>
-      <Route path="*" component={NotFound}/>
-    </Switch>
-  </BrowserRouter>,
+   <AuthProvider>
+      <BrowserRouter>
+      <AppBar/>
+      <Switch>
+        <Route path="/" exact= {true} component={Login}/>
+        <Route path="/start_menu" exact= {true} component={StartMenu}/>
+        <Route path="/register" exact= {true} component={Register}/>
+        <Route path="/forgot_password" exact= {true} component={ForgotPassword}/>
+        <Route path="*" component={NotFound}/>
+      </Switch>
+    </BrowserRouter>
+   </AuthProvider>,
   document.getElementById('root')
 );
 

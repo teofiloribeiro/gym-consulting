@@ -25,9 +25,9 @@ const LoginCard = (props: any) => {
                             direction="column"
                             justify="center"
                             alignItems="center">
-                            <TextField id="standard-basic" label="Usuário" className="input" value={props.user} onChange={props.onUserHandleChange} />
-                            <TextField id="standard-basic" label="Senha" className="input" type="password" value={props.password} onChange={props.onPasswordHandleChange} />
-                            <Button variant="outlined" onClick={props.onSubmit}>Entrar</Button>
+                            <TextField id="standard-basic" label="Usuário" className="input" name="username" />
+                            <TextField id="standard-basic" label="Senha" className="input" name="password" type="password"/>
+                            <Button variant="outlined" type="submit">Entrar</Button>
                         </Grid>
                     </form>
                     <Grid container
