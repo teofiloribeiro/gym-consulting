@@ -18,7 +18,7 @@ export const Login = withRouter(({ history }) => {
             const { email, password } = event.target.elements;
             
             try{
-                await login(email, password);
+                await login(email.value, password.value);
                 history.push('/');
             }catch(error) {
                 //TODO SHOW ERROR ON SCREEN

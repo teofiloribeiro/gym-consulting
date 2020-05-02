@@ -51,15 +51,15 @@ const createUser = async (user: User) => {
     return findUserById(user?.id);
 }
 
-const findUserById = async (id?: string)  => {
+export const findUserById = async (id?: string)  => {
     if(!id) return null
 
     try{
         const user = await firestore.doc(`users/${id}`).get();
+
         return {
-            id,
-            ...user.data
-        }
+            ...user.data()
+        } as User
     }catch(error){
         console.error("error finding user by id ", error)
     }

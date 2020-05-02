@@ -15,11 +15,11 @@ export const Register = withRouter (({ history })=>{
         async (event:any) => {
             event.preventDefault();
             const { name, email, role, birth, password } = event.target.elements;
-
+            
             const user: User = {
                 name: name.value,
                 email: email.value,
-                birth: new Date(Date.parse(birth.value)),
+                birth: parseDate(birth.value),
                 role: role.value as UserRole       
             }
             
@@ -42,4 +42,9 @@ export const Register = withRouter (({ history })=>{
     );
    
 })
+
+const parseDate = (date:string) => {
+    const dateVet = date.split("/").map((date)=>  parseInt(date))
+    return new Date (dateVet[2], dateVet[1]-1, dateVet[0] );
+}
 export default Register;
