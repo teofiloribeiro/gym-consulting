@@ -21,28 +21,31 @@ const ForgotPassword = () => {
                         <div style={{margin:"40px"}}>
                             <Typography variant="h4" component="h2" align="center">
                                 Recuperando senha
-                            </Typography>
-                            
+                            </Typography>  
                         </div>
+                        <form>
                         <div style={{display:"flex" , flexDirection:"column"}}>
-                            <TextField id="user_field" label="Digite o nome do seu usuário"  variant="outlined" style={{margin:"5px 50px 5px"}} />
+                            <TextField name="user_fild" id="user_field" label="Digite o nome do seu usuário"  variant="outlined" style={{margin:"5px 50px 5px"}} />
                             <TextField id="email_field" label="Digite seu email"  variant="outlined" style={{margin:"5px 50px 5px"}}/>
                         </div>
-                        <div style={{margin:"20px 90px 20px"}}>
-                            <Button variant="contained" endIcon={<SubdirectoryArrowLeftIcon/>}>
-                                Voltar
-                            </Button>
-                            <Button variant="contained" color="primary" style={{margin:"0px 10px 0px"}} endIcon={<SendIcon/>}>
-                                Enviar solicitação
-                            </Button>
-                            <Button variant="contained" color="secondary" endIcon={<CancelIcon/>}>
-                                Cancelar
-                            </Button>
-                        </div>
+                            <div style={{margin:"20px 90px 20px"}}>
+                                <Button variant="contained" endIcon={<SubdirectoryArrowLeftIcon/>}>
+                                    Voltar
+                                </Button>
+                                <Button variant="contained" color="primary" style={{margin:"0px 10px 0px"}} endIcon={<SendIcon/>}>
+                                    Enviar solicitação
+                                </Button>
+                                <Button variant="contained" color="secondary" endIcon={<CancelIcon/>}>
+                                    Cancelar
+                                </Button>
+                            </div>
+                        </form>
                     </Card>
                 </Grid>
         </Grid>
     )
 }
+
+// error={true}
 
 export default ForgotPassword;
