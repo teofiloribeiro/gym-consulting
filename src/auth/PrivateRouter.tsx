@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
-// import { Route, Redirect, RouteProps } from 'react-router-dom';
-// import { AuthContext } from './AuthContext';
+import { Route, Redirect } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
 
 
-// export const PrivateRouter = (props : any) => {
-//     const { component: RouteComponent, ...other } = props;
-//     const { user } = useContext <firebase.User | undefined> (AuthContext);
+export const PrivateRouter = (props : any) => {
+    const { component: RouteComponent, ...other } = props;
+    const user = useContext (AuthContext);
 
-//     return (
-//         <Route {...other}
-//             render={(routeProps) => 
-//                 !!user ? (<RouteComponent {...routeProps}/>) :
-//                 (<Redirect to= "/" />) 
-//             }/>
-//     )
-// }
+    return (
+        <Route {...other}
+            render={(routeProps) => 
+                !!user ? (<RouteComponent {...routeProps}/>) :
+                (<Redirect to= "/login" />) 
+            }/>
+    )
+}

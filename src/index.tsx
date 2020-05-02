@@ -11,6 +11,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import StartMenu from './pages/StartMenu';
 import AppBar from './components/AppBar';
 import { AuthProvider } from './auth/AuthContext';
+import { PrivateRouter } from './auth/PrivateRouter';
 
 
 ReactDOM.render(
@@ -19,7 +20,7 @@ ReactDOM.render(
       <AppBar/>
       <Switch>
         <Route path="/login" exact= {true} component={Login}/>
-        <Route path="/" exact= {true} component={StartMenu}/>
+        <PrivateRouter path="/" exact= {true} component={StartMenu}/>
         <Route path="/register" exact= {true} component={Register}/>
         <Route path="/forgot_password" exact= {true} component={ForgotPassword}/>
         <Route path="*" component={NotFound}/>

@@ -34,11 +34,7 @@ const RegisterCard = (props: any) => {
     };
 
     const classes = useStyles();
-    const [profile, setProfile] = React.useState('');
-
-    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setProfile(event.target.value as string);
-    };
+    
      return(
         <Card>
             <CardContent >

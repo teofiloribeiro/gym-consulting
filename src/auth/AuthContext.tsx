@@ -1,8 +1,6 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { auth } from '../firebase';
 
-const initialState = {loggedIn: false}
-
 export const AuthContext = createContext({} as firebase.User | null | undefined);
 
 export const AuthProvider = (props : any) => {
