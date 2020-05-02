@@ -15,5 +15,6 @@ export enum UserRole {
     STUDENT,
     INSTRUCTOR,
     NUTRITIONIST,
-    PHYSIOTHERAPIST
+    PHYSIOTHERAPIST,
+    ADMIN
 }

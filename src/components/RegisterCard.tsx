@@ -34,7 +34,7 @@ const RegisterCard = (props: any) => {
     };
 
     const classes = useStyles();
-    
+
      return(
         <Card>
             <CardContent >
@@ -85,6 +85,7 @@ const RegisterCard = (props: any) => {
                                         <MenuItem value={"INSTRUCTOR"}>Instrutor</MenuItem>
                                         <MenuItem value={"NUTRITIONIST"}>Nutricionista</MenuItem>
                                         <MenuItem value={"PHYSIOTHERAPIST"}>Fisioterapeuta</MenuItem>
+                                        <MenuItem value={"ADMIN"}>Administrador</MenuItem>
                                     </Select>
                                 </FormControl>
                             
