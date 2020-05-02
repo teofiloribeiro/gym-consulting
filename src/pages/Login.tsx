@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core';
 import LoginCard from '../components/LoginCard';
 import { withRouter } from 'react-router-dom';
 
-import { authConfig } from '../firebase';
+import { login } from '../auth/AuthService';
 
 
 export const Login = withRouter(({ history }) => {
@@ -14,10 +14,10 @@ export const Login = withRouter(({ history }) => {
         async (event: any) => {
             event.preventDefault();
             
-            const { username, password } = event.target.elements;
+            const { email, password } = event.target.elements;
             
             try{
-                await authConfig.auth().signInWithEmailAndPassword(username.value, password.value);
+                await login(email, password);
                 history.push('/');
             }catch(error) {
                 //TODO SHOW ERROR ON SCREEN

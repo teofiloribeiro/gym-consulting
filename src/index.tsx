@@ -18,8 +18,8 @@ ReactDOM.render(
       <BrowserRouter>
       <AppBar/>
       <Switch>
-        <Route path="/" exact= {true} component={Login}/>
-        <Route path="/start_menu" exact= {true} component={StartMenu}/>
+        <Route path="/login" exact= {true} component={Login}/>
+        <Route path="/" exact= {true} component={StartMenu}/>
         <Route path="/register" exact= {true} component={Register}/>
         <Route path="/forgot_password" exact= {true} component={ForgotPassword}/>
         <Route path="*" component={NotFound}/>

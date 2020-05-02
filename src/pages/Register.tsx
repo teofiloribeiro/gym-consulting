@@ -1,65 +1,44 @@
 
-import React, { Component } from 'react'
+import React, { useCallback } from 'react'
 import "./Login.scss"
 
 import { Grid } from '@material-ui/core';
 import RegisterCard from '../components/RegisterCard';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { register } from '../auth/AuthService';
+import { User, UserRole } from '../interfaces/User';
 
-export default class Register extends Component {
-    state = {
-        name: '',
-        email: '',
-        user: '',
-        password: '',
-        gotoStartPage: false
-    };
 
-    onNameHandleChange = (event: any) => {
-        this.setState({ name: event.target.value });
-        console.log(this.state)
-    }
+export const Register = withRouter (({ history })=>{
+     
+    const onSubmit = useCallback(
+        async (event:any) => {
+            event.preventDefault();
+            const { name, email, role, birth, password } = event.target.elements;
 
-    onEmailHandleChange = (event: any) => {
-        this.setState({ email: event.target.value });
-        console.log(this.state)
-    }
+            const user: User = {
+                name: name.value,
+                email: email.value,
+                birth: new Date(Date.parse(birth.value)),
+                role: role.value as UserRole       
+            }
+            
+            register(user, password.value);
+        },[history]
+    )
 
-    onUserHandleChange = (event: any) => {
-        this.setState({ user: event.target.value });
-        console.log(this.state)
-    }
-
-    onPasswordHandleChange = (event: any) => {
-        this.setState({ password: event.target.value });
-        console.log(this.state)
-    }
-
-    onSubmit = () => {
-        this.setState({ gotoStartPage: true });
-    }
-
-    render() {
-        if (this.state.gotoStartPage) {
-            return <Redirect to="/" />
-        }
-        return (
-            <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-                className="cardContainer">
-                <Grid item xs={12} md={6} lg={4} >
-                    <RegisterCard name={this.state.name} email={this.state.email}
-                        user={this.state.user} password={this.state.password}
-                        onNameHandleChange={this.onNameHandleChange}
-                        onEmailHandleChange={this.onEmailHandleChange}
-                        onUserHandleChange={this.onUserHandleChange}
-                        onPasswordHandleChange={this.onPasswordHandleChange}
-                        onSubmit={this.onSubmit} />
-                </Grid>
+    return (
+        <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            className="cardContainer">
+            <Grid item xs={12} md={6} lg={4} >
+                <RegisterCard onSubmit={(event: Event) => onSubmit(event)} />
             </Grid>
-        );
-    }
-}
+        </Grid>
+    );
+   
+})
+export default Register;

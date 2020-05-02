@@ -39,8 +39,7 @@ const RegisterCard = (props: any) => {
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         setProfile(event.target.value as string);
     };
-
-    return(
+     return(
         <Card>
             <CardContent >
                 <Grid container
@@ -58,23 +57,24 @@ const RegisterCard = (props: any) => {
                             justify="center"
                             alignItems="center">
   
-                            <TextField id="standard-basic" label="Nome" className="input" value={props.name} onChange={props.onNameHandleChange}/>
+                            <TextField id="standard-basic" label="Nome" className="input" name="name" value={props.name} onChange={props.onNameHandleChange}/>
                             
                             <MuiPickersUtilsProvider locale={ptBR} utils={DateFnsUtils}>
                                 <Grid container justify="space-around">
                                     <KeyboardDatePicker
-                                    disableToolbar
-                                    variant="inline"
-                                    format="dd/MM/yyyy"
-                                    invalidDateMessage="Formato inválido."
-                                    margin="normal"
-                                    id="date-picker-inline"
-                                    label="Data de nascimento"
-                                    value={selectedDate}
-                                    onChange={handleDateChange}
-                                    KeyboardButtonProps={{
-                                        'aria-label': 'change date',    
-                                    }}
+                                        name="birth"
+                                        disableToolbar
+                                        variant="inline"
+                                        format="dd/MM/yyyy"
+                                        invalidDateMessage="Formato inválido."
+                                        margin="normal"
+                                        id="date-picker-inline"
+                                        label="Data de nascimento"
+                                        KeyboardButtonProps={{
+                                            'aria-label': 'change date',    
+                                        }}
+                                        value={selectedDate}
+                                        onChange={handleDateChange}
                                     />
                                 </Grid>
                                 </MuiPickersUtilsProvider>
@@ -82,22 +82,19 @@ const RegisterCard = (props: any) => {
                                 <FormControl className={classes.formControl}>
                                     <InputLabel id="demo-simple-select-label">Perfil</InputLabel>
                                     <Select
+                                    name="role"
                                     labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={profile}
-                                    onChange={handleChange}
-                                    >
-                                    <MenuItem value={10}>Aluno</MenuItem>
-                                    <MenuItem value={20}>Instrutor</MenuItem>
-                                    <MenuItem value={30}>Nutricionista</MenuItem>
-                                    <MenuItem value={30}>Fisioterapeuta</MenuItem>
+                                    id="demo-simple-select">
+                                        <MenuItem value={"STUDENT"}>Aluno</MenuItem>
+                                        <MenuItem value={"INSTRUCTOR"}>Instrutor</MenuItem>
+                                        <MenuItem value={"NUTRITIONIST"}>Nutricionista</MenuItem>
+                                        <MenuItem value={"PHYSIOTHERAPIST"}>Fisioterapeuta</MenuItem>
                                     </Select>
                                 </FormControl>
                             
-                            <TextField id="standard-basic" label="E-mail" className="input" value={props.email} onChange={props.onEmailHandleChange}/>
-                            <TextField id="standard-basic" label="Usuário" className="input" value={props.user} onChange={props.onUserHandleChange}/>
-                            <TextField id="standard-basic" label="Senha" className="input" type="password" value={props.password} onChange={props.onPasswordHandleChange} />                           
-                            <Button variant="outlined" onClick = {props.onSubmit}>Cadastrar</Button>
+                            <TextField id="standard-basic" name="email" label="E-mail" className="input" />
+                            <TextField id="standard-basic" name="password" label="Senha" className="input" type="password" />
+                            <Button variant="outlined" type="submit">Cadastrar</Button>
                         </Grid>
                     </form>
                 </Grid>

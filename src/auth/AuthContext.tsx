@@ -1,5 +1,5 @@
 import React, { useEffect, useState, createContext } from 'react';
-import { authConfig } from '../firebase';
+import { auth } from '../firebase';
 
 export const AuthContext = createContext({} as firebase.User | undefined);
 
@@ -9,7 +9,7 @@ export const AuthProvider = (props : any) => {
     const [waiting, setWaiting] = useState(false);
 
     useEffect (() => {
-        authConfig.auth().onAuthStateChanged((user) => {
+        auth.onAuthStateChanged((user) => {
             
             setUser(user || undefined);
             setWaiting(false);

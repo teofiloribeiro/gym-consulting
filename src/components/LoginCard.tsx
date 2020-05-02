@@ -25,7 +25,7 @@ const LoginCard = (props: any) => {
                             direction="column"
                             justify="center"
                             alignItems="center">
-                            <TextField id="standard-basic" label="Usuário" className="input" name="username" />
+                            <TextField id="standard-basic" label="Usuário" className="input" name="email" />
                             <TextField id="standard-basic" label="Senha" className="input" name="password" type="password"/>
                             <Button variant="outlined" type="submit">Entrar</Button>
                         </Grid>

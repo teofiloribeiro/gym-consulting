@@ -22,4 +22,6 @@ const firebaseConfig = {
 //     auth.signInWithPopup(provider);
 // };
 
-export const authConfig = firebase.initializeApp(firebaseConfig);
+const firebaseService = firebase.initializeApp(firebaseConfig);
+export const auth = firebaseService.auth();
+export const firestore = firebaseService.firestore();
