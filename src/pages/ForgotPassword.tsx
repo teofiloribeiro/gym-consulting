@@ -1,28 +1,12 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { Card , Typography} from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import SubdirectoryArrowLeftIcon from '@material-ui/icons/SubdirectoryArrowLeft';
-
-
 import CancelIcon from '@material-ui/icons/Cancel';
-
-
-    
-
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '25ch',
-      },
-    },
-  }));
 
 const ForgotPassword = () => {
     return (
@@ -44,16 +28,16 @@ const ForgotPassword = () => {
                             <TextField id="user_field" label="Digite o nome do seu usuário"  variant="outlined" style={{margin:"5px 50px 5px"}} />
                             <TextField id="email_field" label="Digite seu email"  variant="outlined" style={{margin:"5px 50px 5px"}}/>
                         </div>
-                        <div style={{display:"center", margin:"10px 50px 20px"}}>
-                        <Button variant="contained" endIcon={<SubdirectoryArrowLeftIcon/>}>
-                            Voltar
-                        </Button>
-                        <Button variant="contained" color="primary" style={{margin:"0px 10px 0px"}} endIcon={<SendIcon/>}>
-                            Enviar solicitação
-                        </Button>
-                        <Button variant="contained" color="secondary" endIcon={<CancelIcon/>}>
-                            Cancelar
-                        </Button>
+                        <div style={{margin:"20px 90px 20px"}}>
+                            <Button variant="contained" endIcon={<SubdirectoryArrowLeftIcon/>}>
+                                Voltar
+                            </Button>
+                            <Button variant="contained" color="primary" style={{margin:"0px 10px 0px"}} endIcon={<SendIcon/>}>
+                                Enviar solicitação
+                            </Button>
+                            <Button variant="contained" color="secondary" endIcon={<CancelIcon/>}>
+                                Cancelar
+                            </Button>
                         </div>
                     </Card>
                 </Grid>
