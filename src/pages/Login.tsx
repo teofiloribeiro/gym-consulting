@@ -1,11 +1,12 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useContext } from 'react'
 import "./Login.scss"
 
 import { Grid } from '@material-ui/core';
 import LoginCard from '../components/LoginCard';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import { login } from '../auth/AuthService';
+import { AuthContext } from '../auth/AuthContext';
 
 
 export const Login = withRouter(({ history }) => {
@@ -26,7 +27,13 @@ export const Login = withRouter(({ history }) => {
         },
         [history]
     );   
+    
+    const auth  = useContext(AuthContext);
 
+    if(auth){
+        console.log(auth)
+        return <Redirect to="/"/>
+    }
     return (
         <div className="bg-login">
             <Grid

@@ -30,6 +30,10 @@ export const login = async (email: string, password: string) => {
     }
 }
 
+export const logout = async () => {
+    auth.signOut()
+}
+
 const createUser = async (user: User) => {
     const userRef = firestore.doc(`users/${user.id}`);
     const snapshot = await userRef.get();

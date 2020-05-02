@@ -24,6 +24,7 @@ export const Register = withRouter (({ history })=>{
             }
             
             register(user, password.value);
+            history.push('/');
         },[history]
     )
 

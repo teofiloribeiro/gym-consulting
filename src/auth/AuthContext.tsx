@@ -1,17 +1,19 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { auth } from '../firebase';
 
-export const AuthContext = createContext({} as firebase.User | undefined);
+const initialState = {loggedIn: false}
+
+export const AuthContext = createContext({} as firebase.User | null | undefined);
 
 export const AuthProvider = (props : any) => {
     const { children } = props;
-    const [user, setUser] = useState<firebase.User>();
-    const [waiting, setWaiting] = useState(false);
+    const [user, setUser] = useState<firebase.User | null>();
+    const [waiting, setWaiting] = useState(true);
 
     useEffect (() => {
-        auth.onAuthStateChanged((user) => {
+        auth.onAuthStateChanged((resUser) => {
             
-            setUser(user || undefined);
+            setUser(resUser);
             setWaiting(false);
         })
     }, []);
