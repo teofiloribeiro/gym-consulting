@@ -12,7 +12,7 @@ import StartMenu from './pages/StartMenu';
 import AppBar from './components/AppBar';
 import { AuthProvider } from './auth/AuthContext';
 import { PrivateRouter } from './auth/PrivateRouter';
-
+import Advice from './pages/Advice'
 
 ReactDOM.render(
    <AuthProvider>
@@ -23,6 +23,7 @@ ReactDOM.render(
         <PrivateRouter path="/" exact= {true} component={StartMenu}/>
         <Route path="/register" exact= {true} component={Register}/>
         <Route path="/forgot_password" exact= {true} component={ForgotPassword}/>
+        <PrivateRouter path="/Advice" exact= {true} component={Advice}/>
         <Route path="*" component={NotFound}/>
       </Switch>
     </BrowserRouter>
