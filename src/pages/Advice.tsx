@@ -1,6 +1,6 @@
-import React from "react"
+import React, { useState } from "react"
 import { Grid } from "@material-ui/core"
-import AdviceCard from "../components/AdviceCard"
+import { AdviceCard, NutricionistList } from "../components/AdviceCard"
 
 import atividadeFisicaImg from "../components/assets/atividadesfisicas.jpg"
 import dietaFlexivelImg from "../components/assets/dietaFlexível.jpg"
@@ -9,12 +9,39 @@ import academiaCrossfit from "../components/assets/musculacaoCrossfit.jpg"
 import alimentacao from '../components/assets/alimentacao.jpg'
 import aguaImg from '../components/assets/agua.jpg'
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import Collapse from '@material-ui/core/Collapse';
+
 
 import "./Advice.scss"
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            width: '100%',
+            maxWidth: 360,
+            backgroundColor: theme.palette.background.paper,
+        },
+        nested: {
+            paddingLeft: theme.spacing(4),
+        },
+        inline: {
+            display: 'inline',
+        },
+    }),
+);
 
-
-export default function Advice () {
+export default function Advice() {
+    const [open, setOpen] = useState(false);
+    const classes = useStyles();
+    const handleClick = () => {
+        setOpen(!open);
+    }
 
     return (
 
@@ -75,9 +102,47 @@ export default function Advice () {
 
 
             </Grid>
+            <Grid
+                container
+                direction="row"
+                justify="flex-end"
+                alignItems="flex-end"
+                className="cardContainerAdvice"
+            >
+                <List
+                    component="nav"
+                    aria-labelledby="nested-list-subheader"
 
+                    className={classes.root}
+                >
+                    <ListItem button onClick={handleClick}>
+                        <ListItemText primary="Nutricionistas" />
+                        {open ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <NutricionistList
+                                name={"Marília Mendonça"}
+                                email={"marili@emal.xom"}
+                            />
+                            <NutricionistList
+                                name={"João Barros"}
+                                email={"joao@email.com"}
+                            />
+                            <NutricionistList
+                                name={"Joana"}
+                                email={"joana@emal.xom"}
+                            />
+                            <NutricionistList
+                                name={"Geni Maria"}
+                                email={"geniM@emal.xom"}
+                            />
+                        </List>
+                    </Collapse>
+                </List>
+            </Grid>
 
-        </Grid>
+            </Grid>
     )
 
 }
