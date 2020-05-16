@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -11,6 +11,15 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { blue } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+
+
+
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+
+
+
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,9 +48,9 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const AdviceCard = (props: any) => {
+export const AdviceCard = (props: any) => {
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -83,8 +92,49 @@ const AdviceCard = (props: any) => {
                 </CardContent>
             </Collapse>
         </Card>
-        
+
     )
 }
 
-export default AdviceCard;
+const useStyles2 = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            width: '100%',
+            maxWidth: 360,
+            backgroundColor: theme.palette.background.paper,
+        },
+        nested: {
+            paddingLeft: theme.spacing(4),
+        },
+        inline: {
+            display: 'inline',
+        },
+    }),
+);
+
+export const NutricionistList = (props: any) => {
+    const classes2 = useStyles2();
+    return (
+
+        <ListItem button className={classes2.nested}>
+            <ListItemText
+                primary={`Nutri ${props.name}`}
+                secondary={
+                    <React.Fragment>
+                        <Typography
+                            component="span"
+                            variant="body2"
+                            className={classes2.inline}
+                            color="textPrimary"
+                        >
+                            {props.name}
+                            <br />  </Typography>
+                        {props.email}
+                    </React.Fragment>
+                }
+            />
+        </ListItem>
+
+
+    );
+}
