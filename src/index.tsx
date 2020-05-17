@@ -13,6 +13,8 @@ import AppBar from './components/AppBar';
 import { AuthProvider } from './auth/AuthContext';
 import { PrivateRouter } from './auth/PrivateRouter';
 import Advice from './pages/Advice'
+import Diet from './pages/Diet';
+//import diet from "./components/diet/AddDietModal";
 
 ReactDOM.render(
    <AuthProvider>
@@ -24,6 +26,7 @@ ReactDOM.render(
         <Route path="/register" exact= {true} component={Register}/>
         <Route path="/forgot_password" exact= {true} component={ForgotPassword}/>
         <PrivateRouter path="/Advice" exact= {true} component={Advice}/>
+        <PrivateRouter path="/diet" exact={true} component={Diet}/>
         <Route path="*" component={NotFound}/>
       </Switch>
     </BrowserRouter>
