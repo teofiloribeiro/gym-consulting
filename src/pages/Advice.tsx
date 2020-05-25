@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Grid } from "@material-ui/core"
 import { AdviceCard, NutricionistList } from "../components/AdviceCard"
 
@@ -19,6 +19,9 @@ import Collapse from '@material-ui/core/Collapse';
 
 
 import "./Advice.scss"
+import { Nutricionist } from "../interfaces/Nutricionist"
+import NutricionistData from '../data/NutricionistData';
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -36,12 +39,34 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+
+
+const itensList = (nutricionist: Nutricionist[]) =>{
+    const itens: any[] = [];
+    nutricionist.forEach((nutri: Nutricionist, index: number) => itens.push(
+        <NutricionistList 
+            name ={nutri.name}
+            email = {nutri.email}
+        />
+    ))
+    return itens;
+}
+
+function nutriConsulta () {
+    
+}
+
 export default function Advice() {
     const [open, setOpen] = useState(false);
     const classes = useStyles();
     const handleClick = () => {
         setOpen(!open);
     }
+
+    useEffect(() => {
+        const dataNutri = new NutricionistData();
+        dataNutri.consulta();
+    }, [])
 
     return (
 
@@ -141,8 +166,8 @@ export default function Advice() {
                     </Collapse>
                 </List>
             </Grid>
-
-            </Grid>
+            
+        </Grid>
     )
 
 }
