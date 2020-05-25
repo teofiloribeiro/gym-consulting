@@ -11,6 +11,8 @@ import { withRouter } from 'react-router-dom'
 import { AuthContext } from '../auth/AuthContext';
 import { logout } from '../auth/AuthService';
 
+import { Link, NavLink } from 'react-router-dom'
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,6 +42,8 @@ const MenuAppBar = withRouter(({ history }) => {
     setAnchorEl(null);
   };
 
+  const handleProfile = () => history.push('/Profile')
+
   const handleLogout = useCallback(
         async (event: any) => {
           event.preventDefault();        
@@ -64,7 +68,18 @@ const MenuAppBar = withRouter(({ history }) => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h4" className={classes.title} align="center">
-          Studio Body
+          
+          <Link to='/'></Link>
+
+          <NavLink
+            className="tags"
+            style={{ textDecoration: 'none' }}
+            activeStyle={{ color: 'white' }}
+            to={"/"}
+            >
+           {"Studio Body"}
+         </NavLink>
+
           </Typography>
         <div>
           <IconButton
@@ -91,7 +106,7 @@ const MenuAppBar = withRouter(({ history }) => {
             open={open}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleProfile}>Profile</MenuItem>
             <MenuItem onClick={handleLogout}>Sair</MenuItem>
           </Menu>
         </div>
