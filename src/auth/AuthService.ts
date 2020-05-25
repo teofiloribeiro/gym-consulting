@@ -55,12 +55,25 @@ export const findUserById = async (id?: string)  => {
     if(!id) return null
 
     try{
-        const user = await firestore.doc(`users/${id}`).get();
-
+        const userDoc = await firestore.doc(`users/${id}`).get();
+        const { user } = <any> userDoc.data();
+        
         return {
-            ...user.data()
+            ...user
         } as User
     }catch(error){
         console.error("error finding user by id ", error)
+    }
+}
+
+
+export const updateUser = async (user: User) => {
+    try{
+        const res =  await auth.currentUser;
+        user.id = res?.uid;
+        const userRef = firestore.doc(`users/${user.id}`);
+        await userRef.update({ user });
+    }catch (error) {
+        console.error("error update user", error);
     }
 }
