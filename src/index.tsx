@@ -14,6 +14,7 @@ import { AuthProvider } from './auth/AuthContext';
 import { PrivateRouter } from './auth/PrivateRouter';
 import Advice from './pages/Advice'
 import Diet from './pages/Diet';
+import { Users } from './pages/Users';
 //import diet from "./components/diet/AddDietModal";
 
 ReactDOM.render(
@@ -27,6 +28,7 @@ ReactDOM.render(
         <Route path="/forgot_password" exact= {true} component={ForgotPassword}/>
         <PrivateRouter path="/Advice" exact= {true} component={Advice}/>
         <PrivateRouter path="/diet" exact={true} component={Diet}/>
+        <PrivateRouter path="/users" exact={true} component={Users}/>
         <Route path="*" component={NotFound}/>
       </Switch>
     </BrowserRouter>

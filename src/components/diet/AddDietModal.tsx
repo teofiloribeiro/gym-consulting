@@ -33,6 +33,10 @@ const useStyles = makeStyles((theme: Theme) =>
         tableContainer: {
             height: 350,
         },
+        headerText: {
+            fontWeight: 'bold',
+            fontSize: 20
+        }
     }),
 );
 
@@ -40,7 +44,7 @@ export const AddDietModal = (props: any) => {
     const { newDietHandler } = props;
     
     const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => {
         setOpen(true);
@@ -218,7 +222,7 @@ const Form = (props: any) => {
                         <AddIcon fontSize="large" />
                     </IconButton>
                 </div>
-                <ItensTable dietData={dietItens} onRemove={removeItem} />
+                <DietItensTable dietData={dietItens} onRemove={removeItem} />
                 <FormControl className={classes.formControl}>
                     <Button variant="contained" color="primary" onClick={saveHandle}>
                         Salvar
@@ -229,21 +233,21 @@ const Form = (props: any) => {
     )
 }
 
-const ItensTable = (props: any) => {
+export const DietItensTable = (props: any) => {
     const classes = useStyles();
     const { dietData, onRemove } = props;
-    let index = 0;
+    console.log('from diet', dietData)
     return (
         <TableContainer component={Paper} className={classes.tableContainer}>
             <Table className={classes.table} size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Horario</TableCell>
-                        <TableCell align="right">Item</TableCell>
-                        <TableCell align="right">Tipo de Nutriente</TableCell>
-                        <TableCell align="right">Quantidade</TableCell>
-                        <TableCell align="right">Medida</TableCell>
-                        <TableCell align="right">Remover</TableCell>
+                        <TableCell className={classes.headerText}>Horario</TableCell>
+                        <TableCell align="center" className={classes.headerText}>Item</TableCell>
+                        <TableCell align="center" className={classes.headerText}> Tipo de Nutriente</TableCell>
+                        <TableCell align="center" className={classes.headerText}>Quantidade</TableCell>
+                        <TableCell align="center" className={classes.headerText}>Medida</TableCell>
+                        {onRemove ? <TableCell align="center" className={classes.headerText}>Remover</TableCell> : null}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -261,15 +265,15 @@ const tableRows = (dietItens: DietItem[], removeFunc: any) => {
             <TableCell component="th" scope="row">
                 {row.time}
             </TableCell>
-            <TableCell align="right">{row.desc}</TableCell>
-            <TableCell align="right">{row.nutrient}</TableCell>
-            <TableCell align="right">{row.qty}</TableCell>
-            <TableCell align="right">{row.measure}</TableCell>
-            <TableCell align="right">
+            <TableCell align="center">{row.desc}</TableCell>
+            <TableCell align="center">{row.nutrient}</TableCell>
+            <TableCell align="center">{row.qty}</TableCell>
+            <TableCell align="center">{row.measure}</TableCell>
+            {removeFunc ? <TableCell  align="center">
                 <IconButton onClick={ () => removeFunc(index) }>
                     <DeleteIcon fontSize="large" />
                 </IconButton>
-            </TableCell>
+            </TableCell> : null}
         </TableRow>
     ))
     return rows;
