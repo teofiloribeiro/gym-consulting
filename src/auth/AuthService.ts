@@ -6,7 +6,7 @@ export const register = async (user: User , password: string) => {
     try{
         const res =  await auth.createUserWithEmailAndPassword(user.email, password);
         user.id = res.user?.uid;
-        createUser(user);
+        await createUser(user);
         
     }catch (error) {
         //Handler error and show to the user
@@ -43,7 +43,7 @@ const createUser = async (user: User) => {
     }
 
     try{
-        await userRef.set({ user });
+        await userRef.set( user );
     }catch (error){
         console.error("erro creating user ", error);
     }
@@ -56,8 +56,8 @@ export const findUserById = async (id?: string)  => {
 
     try{
         const userDoc = await firestore.doc(`users/${id}`).get();
-        const { user } = <any> userDoc.data();
-        
+        const user = <any> userDoc.data();
+        console.log(user);
         return {
             ...user
         } as User

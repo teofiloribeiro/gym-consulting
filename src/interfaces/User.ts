@@ -12,9 +12,9 @@ export interface Login {
 }
 
 export enum UserRole {
-    STUDENT,
-    INSTRUCTOR,
-    NUTRITIONIST,
-    PHYSIOTHERAPIST,
-    ADMIN
+    STUDENT = "STUDENT",
+    INSTRUCTOR = "INSTRUCTOR",
+    NUTRITIONIST = "NUTRITIONIST",
+    PHYSIOTHERAPIST = "PHYSIOTHERAPIST",
+    ADMIN = "ADMIN"
 }

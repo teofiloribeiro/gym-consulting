@@ -23,7 +23,7 @@ export const Register = withRouter (({ history })=>{
                 role: role.value as UserRole       
             }
             
-            register(user, password.value);
+            await register(user, password.value);
             history.push('/');
         },[history]
     )
