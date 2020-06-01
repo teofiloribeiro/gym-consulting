@@ -49,7 +49,7 @@ export const UsersList = (props: any) => {
 					</TableRow>
 				</TableHead>
 				<TableBody className={classes.body}>
-					<TableRows users={users} onDiet={props.onDiet}/>
+					<TableRows users={props.users} onDiet={props.onDiet}/>
 				</TableBody>
 			</Table>
 		</TableContainer>
@@ -67,7 +67,7 @@ const TableRows = (props: any) => {
 					{user.name}
 				</TableCell>
 				<TableCell align="center">
-					<IconButton title="Dieta" onClick= {props.onDiet}>
+					<IconButton title="Dieta" onClick= {() => props.onDiet(user.id)}>
 						<AssignmentIcon fontSize="large" />
 					</IconButton>
 					<IconButton title="Treino">
@@ -84,7 +84,7 @@ const users: User[] = [
 	{
 		name: "Carlos Silva",
 		email: "carlos@silva",
-		id: "1",
+		id: "E4lDKSSGLdYD5mbzgGlxNYTrKXs1",
 		birth: new Date(),
 		role: UserRole.STUDENT,
 	},

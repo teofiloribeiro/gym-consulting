@@ -7,6 +7,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 
 import { login } from '../auth/AuthService';
 import { AuthContext } from '../auth/AuthContext';
+import DietData from '../data/DietData';
 
 
 export const Login = withRouter(({ history }) => {
@@ -27,7 +28,6 @@ export const Login = withRouter(({ history }) => {
         },
         [history]
     );   
-    
     const auth  = useContext(AuthContext);
 
     if(auth){

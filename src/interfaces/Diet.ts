@@ -1,5 +1,6 @@
 export interface Diet {
     id?: string,
+    userId: string
     title: string,
     itens: DietItem []
 }

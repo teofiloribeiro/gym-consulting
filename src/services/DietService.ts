@@ -12,4 +12,16 @@ export default class DietService {
         diet.id = new Date().getTime().toString();
         this.DietData.create(diet);
     }
+
+    findById = async (userId?: string) => {
+        if(!userId){
+            return {
+                itens:[],
+                title:'',
+                userId:'',
+                id:''
+            } as Diet 
+        }
+        return await this.DietData.findById(userId);
+    }
 }

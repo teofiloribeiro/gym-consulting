@@ -71,7 +71,7 @@ export const AddDietModal = (props: any) => {
                     timeout: 500,
                 }}>
 
-                <Form open={open} newDietHandler={newDietHandler} />
+                <Form open={open} newDietHandler={newDietHandler} user = {props.user}/>
             </Modal>
         </div>
     );
@@ -121,6 +121,7 @@ const Form = (props: any) => {
 
     const saveHandle = () => {
         const newDiet: Diet = {
+            userId: props.user,
             title: title,
             itens: dietItens
         }

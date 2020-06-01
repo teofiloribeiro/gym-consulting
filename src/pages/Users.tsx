@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { UsersList } from '../components/UserList';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { User } from '../interfaces/User';
+import { findAllStudents } from "../data/UserData";
 
 export const Users = withRouter(({history}) => {
     const classes = useStyles();
+    const [users, setUsers] = useState<User[]>([]);
+    const onDietHandler = (userId: string) => history.push({pathname: '/diet', state: userId });
     
-    const onDietHandler = () => history.push('/diet');
+    useEffect(() => {
+        const getStudents = async () => {
+            let response = await findAllStudents();
+            setUsers(response)
+        }   
+        
+        getStudents();
+    },[]); 
 
     return (
         <div className = {classes.listContainer}>
-            <UsersList onDiet = {onDietHandler}/>
+            <UsersList onDiet = {onDietHandler} users = {users}  />
         </div>
     ) 
 })
@@ -24,4 +35,4 @@ const useStyles = makeStyles((theme: Theme) =>
             marginTop: 40
         }
     }),
-);
+)

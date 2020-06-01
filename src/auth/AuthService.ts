@@ -57,7 +57,7 @@ export const findUserById = async (id?: string)  => {
     try{
         const userDoc = await firestore.doc(`users/${id}`).get();
         const user = <any> userDoc.data();
-        console.log(user);
+        
         return {
             ...user
         } as User
