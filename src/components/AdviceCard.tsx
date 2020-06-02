@@ -116,7 +116,7 @@ export const NutricionistList = (props: any) => {
     const classes2 = useStyles2();
     return (
 
-        <ListItem button className={classes2.nested}>
+        <ListItem key={props.index} button className={classes2.nested}>
             <ListItemText
                 primary={`Nutri ${props.name}`}
                 secondary={

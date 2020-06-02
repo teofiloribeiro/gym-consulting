@@ -19,7 +19,7 @@ import Collapse from '@material-ui/core/Collapse';
 
 
 import "./Advice.scss"
-import { Nutricionist } from "../interfaces/Nutricionist"
+import { User } from "../interfaces/User"
 import NutricionistData from '../data/NutricionistData';
 
 
@@ -41,31 +41,37 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 
-const itensList = (nutricionist: Nutricionist[]) =>{
-    const itens: any[] = [];
-    nutricionist.forEach((nutri: Nutricionist, index: number) => itens.push(
-        <NutricionistList 
-            name ={nutri.name}
-            email = {nutri.email}
-        />
-    ))
-    return itens;
-}
 
-function nutriConsulta () {
-    
-}
 
 export default function Advice() {
     const [open, setOpen] = useState(false);
+    const [nutricionist, setNutricionist] = useState<User[]>([])
     const classes = useStyles();
     const handleClick = () => {
         setOpen(!open);
     }
-
+    
+    const ItensList = (props: any) =>{
+        const itens: any = [];
+        nutricionist.forEach((nutri: User, index:Number) => itens.push(
+            <NutricionistList
+                index ={index} 
+                name = {nutri.name}
+                email = {nutri.email}
+            />
+        ))
+        return itens;
+    }
     useEffect(() => {
+        let nutriList: User[] =[];
         const dataNutri = new NutricionistData();
-        dataNutri.consulta();
+        dataNutri.consulta().then(data => {
+            data.forEach(nutri =>{
+                nutriList.push(nutri)
+            })
+            setNutricionist(nutriList)
+        })
+        
     }, [])
 
     return (
@@ -146,22 +152,7 @@ export default function Advice() {
                     </ListItem>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                            <NutricionistList
-                                name={"Marília Mendonça"}
-                                email={"marili@emal.xom"}
-                            />
-                            <NutricionistList
-                                name={"João Barros"}
-                                email={"joao@email.com"}
-                            />
-                            <NutricionistList
-                                name={"Joana"}
-                                email={"joana@emal.xom"}
-                            />
-                            <NutricionistList
-                                name={"Geni Maria"}
-                                email={"geniM@emal.xom"}
-                            />
+                           <ItensList />
                         </List>
                     </Collapse>
                 </List>
