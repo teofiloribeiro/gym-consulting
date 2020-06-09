@@ -89,6 +89,15 @@ export const AdviceCard = (props: any) => {
                     <Typography paragraph>
                         {props.paragraph}
                     </Typography>
+                    <Typography paragraph>
+                        {props.paragraph2}
+                    </Typography>
+                    <Typography paragraph>
+                        {props.paragraph3}
+                    </Typography>
+                    <Typography paragraph>
+                        {props.paragraph4}
+                    </Typography>
                 </CardContent>
             </Collapse>
         </Card>
