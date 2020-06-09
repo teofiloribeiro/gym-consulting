@@ -26,8 +26,13 @@ export default class StartMenu extends Component {
     onSubmit = () => {
         this.setState({ gotoDietPage: true });
     }
+    
     onSubmitAdvice = () => {
         this.setState({ gotoAdvicePage: true})
+    }
+
+    onSubmitMeasures = () => {
+        this.setState({ gotoMeasuresPage: true})
     }
 
     render() {
@@ -65,7 +70,7 @@ export default class StartMenu extends Component {
                 title={"Medidas"}
                 img={medidaImg}
                 description={"É importante saber suas medidas, para ver o seu progresso"}
-                onSubmit={this.onSubmit} />
+                onSubmit={this.onSubmitMeasures} />
 
              <StartMenuCard
                 title={"Dicas"}
