@@ -6,6 +6,7 @@ import MeasuresCard from '../components/MeasuresCard';
 import { withRouter } from 'react-router-dom';
 import { register, updateUser } from '../auth/AuthService';
 import { User, UserRole } from '../interfaces/User';
+import SplineChart from '../components/Spline Chart';
 
 import { useContext } from 'react';
 import { AuthContext } from '../auth/AuthContext';
@@ -27,12 +28,11 @@ export const Profile = withRouter (({ history })=>{
             alignItems="center"
             className="cardContainer">
             <Grid item xs={12} md={6} lg={4} >
-                <MeasuresCard  onSubmit={(event: Event) => onSubmit(event)} />
+                <MeasuresCard />
             </Grid>
         </Grid>
     );
    
 })
-
 
 export default Profile;
