@@ -5,7 +5,7 @@ import { DIET } from "./collections";
 
 export default class DietData {
 
-    create = async (diet: Diet) => {
+    createOrUpdate = async (diet: Diet) => {
         const dietRef = firestore.collection('diet').doc(diet.id);
 
         try {
@@ -18,7 +18,7 @@ export default class DietData {
 
     findById = async (userId: string) => {
        
-        console.log("tring to retrive data")
+        console.log("trying to retrive data", userId)
         let users: Diet[] = []
         
         const dietRef = firestore.collection(DIET);
@@ -30,4 +30,5 @@ export default class DietData {
         
         return users[0]
     }
+
 }

@@ -5,71 +5,54 @@ import { Diet, Nutrient, Measure } from "../interfaces/Diet";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { withRouter, Redirect } from 'react-router-dom'
 import { AuthContext } from "../auth/AuthContext";
+import { UserRole } from "../interfaces/User";
+import { Button } from "@material-ui/core";
 
-// export default class DietPage1 extends Component {
-//     dietService: DietService = new DietService();
-
-//     componentDidMount = async () => {
-        
-//     }
-
-
-
-//     render(){
-//         return (
-//             <div>
-//                 <AddDietModal newDietHandler={this.newDietHandler}/>
-//                 <div>
-//                     <DietItensTable dietData={diet.itens}/>
-//                 </div>
-//             </div>
-//         )
-//     }
-
-//     newDietHandler = (diet: Diet) => {
-//         this.dietService.create(diet)
-//     }
-//  }
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		container: {
             width: '90%',
             flex: '',
-            alignItems: 'center'
+            alignItems: 'center',
+            marginTop: 30
 		},
 	})
 );
 
-
 const DietPage = withRouter (({ history }) => {
     const classes = useStyles()
+    const [dietUserId, setDietUserId] = useState<string | undefined>();
+
     const [diet, setDiet] = useState<Diet>({
         itens:[],
         title:'',
         userId:'',
         id:''
     });
+    
     const dietService: DietService = new DietService();
-
     const authUser = useContext (AuthContext);
-
+    
     useEffect(() => {
+        const searchUserId = authUser?.role == UserRole.STUDENT ? authUser?.id : (history.location.state as string);
+        console.log(dietUserId)
+        setDietUserId(searchUserId);
         const getDiet = async (id?: string) => {
             let response = await new DietService().findById(id);
             setDiet(response || diet)
-        }   
-        
-        getDiet(history.location.state as string || authUser?.id);
-    },[]); 
+        }
+        getDiet(dietUserId);
+    },[dietUserId]); 
    
-    const newDietHandler = (diet: Diet) => {
-        dietService.create(diet)
+    const newDietHandler = async (diet: Diet) => {
+        await dietService.create(diet);
+        window.location.reload(false)
     }
-    
+
     return (
         <div className={classes.container}>
-            <AddDietModal newDietHandler={newDietHandler} user={authUser}/>
+            <AddDietModal newDietHandler={newDietHandler} user={dietUserId} dietData={diet}/>
             <div>
                 <DietItensTable dietData={diet.itens}/>
             </div>
@@ -78,31 +61,3 @@ const DietPage = withRouter (({ history }) => {
 })
 
  export default DietPage;
-
- const diet: Diet = {
-     title: "fastfood",
-     userId: "suhauhuashus",
-     itens: [
-        {
-            desc: 'Lasanha',
-            measure: Measure.KG,
-            nutrient: Nutrient.CARBOIDRATO,
-            qty: 2,
-            time: '12:00'
-        },
-        {
-            desc: 'Peixe',
-            measure: Measure.KG,
-            nutrient: Nutrient.CARBOIDRATO,
-            qty: 2,
-            time: '12:00'
-        },{
-            desc: 'Pitanga',
-            measure: Measure.KG,
-            nutrient: Nutrient.CARBOIDRATO,
-            qty: 2,
-            time: '12:00'
-        }
-     ]
-
- }
