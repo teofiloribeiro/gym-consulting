@@ -1,11 +1,38 @@
-import React from 'react';
+import React, { useCallback } from 'react'
+import "./Login.scss"
 
-const PageToBuild = () => {
-    return (
-        <div>
-            <h1>PAGE TO BUILD! :)</h1>
-        </div>
+import { Grid } from '@material-ui/core';
+import MeasuresCard from '../components/MeasuresCard';
+import { withRouter } from 'react-router-dom';
+import { register, updateUser } from '../auth/AuthService';
+import { User, UserRole } from '../interfaces/User';
+import SplineChart from '../components/Spline Chart';
+
+import { useContext } from 'react';
+import { AuthContext } from '../auth/AuthContext';
+
+export const Profile = withRouter (({ history })=>{
+  
+    const user = useContext (AuthContext);
+
+    const onSubmit = useCallback(
+        async (event:any) => { 
+        },[history]
     )
-}
 
-export default PageToBuild;
+    return (
+        <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            className="cardContainer">
+            <Grid item xs={12} md={6} lg={4} >
+                <MeasuresCard />
+            </Grid>
+        </Grid>
+    );
+   
+})
+
+export default Profile;

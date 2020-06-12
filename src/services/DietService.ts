@@ -8,9 +8,11 @@ export default class DietService {
         this.DietData = new DietData ();
     }
 
-    create(diet: Diet){
-        diet.id = new Date().getTime().toString();
-        this.DietData.create(diet);
+    async create(diet: Diet) {
+        if(!diet.id){
+            diet.id = new Date().getTime().toString();
+        }
+        await this.DietData.createOrUpdate(diet);
     }
 
     findById = async (userId?: string) => {
