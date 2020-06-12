@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Typography, Grid, 
+import { Card, CardContent, Button, Typography, Grid, 
         TextField} from '@material-ui/core';
 
 import CardMedia from '@material-ui/core/CardMedia';
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const MeasuresCard = (props: any) => {
-    
+
     const classes = useStyles();
 
     const [modalStyle] = React.useState(getModalStyle);
@@ -85,11 +85,10 @@ const MeasuresCard = (props: any) => {
                 <Modal
                     open={open}
                     onClose={handleClose}
-                    aria-labelledby="simple-modal-title"
-                    aria-describedby="simple-modal-description"
                 >
                     {body}
                 </Modal>
+                <form className="registerForm" onSubmit= {props.onSubmit}>
                 <Grid container
                     direction="column"
                     justify="center"
@@ -110,12 +109,12 @@ const MeasuresCard = (props: any) => {
                                 <CardMedia className={classes.iconSize}
                                                 component="img"
                                                 image={weightIcon}
-                                                title="teste" />
+                                                title="Histórico de peso" />
                             </CardActionArea>
                         </Grid>
                         <Grid item>
-                            <TextField id="input-with-icon-grid" label="Peso"  
-                            InputProps={{ disableUnderline: true}}  />
+                            <TextField id="input-with-icon-grid" name="weight" label="Peso"  
+                            InputProps={{ disableUnderline: true}} value={props.weight} onChange={props.onWeightHandleChange}/>
                         </Grid> 
                     </Grid>
 
@@ -124,11 +123,11 @@ const MeasuresCard = (props: any) => {
                         <CardMedia className={classes.iconSize}
                                         component="img"
                                         image={heightIcon}
-                                        title="teste" />
+                                        title="Histórico de altura" />
                         </Grid>
                         <Grid item>
-                            <TextField id="input-with-icon-grid" label="Altura"
-                             InputProps={{ disableUnderline: true}} />
+                            <TextField id="input-with-icon-grid" name="height" label="Altura"
+                             InputProps={{ disableUnderline: true}} value={props.height} onChange={props.onHeightHandleChange} />
                         </Grid>
                     </Grid>
 
@@ -144,7 +143,9 @@ const MeasuresCard = (props: any) => {
                              InputProps={{ disableUnderline: true}} />
                         </Grid>
                     </Grid>
+                    <Button variant="outlined" type="submit">Salvar</Button>
                 </Grid>
+                </form>
             </CardContent>
         </Card>
     )
