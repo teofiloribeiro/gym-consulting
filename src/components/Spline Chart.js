@@ -13,7 +13,6 @@ class SplineChart extends Component {
 				valueFormatString: "MMM"
 			},
 			axisY: {
-				title: "Kilos",
 				suffix:"Kg",
 				includeZero: false
 			},
