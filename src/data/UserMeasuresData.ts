@@ -1,7 +1,7 @@
 import { firestore } from "../firebase";
 import { Diet } from "../interfaces/Diet";
 import { UserRole, User } from "../interfaces/User";
-import { DIET } from "./collections";
+import { MEASURES } from "./collections";
 import { UserMeasures } from '../interfaces/UserMeasures';
 
 export default class UserMeasuresData {
@@ -15,5 +15,19 @@ export default class UserMeasuresData {
         }catch(err){
             console.log(`Error Creating user measures`, err);
         }
+    }
+
+    findByUserId = async (userId: string) => {
+        const userMeasures: UserMeasures[] = [];
+        console.log("trying to retrive data", userId)
+    
+        const userMeasuresRef = firestore.collection(MEASURES);
+        let query = await userMeasuresRef.where('userId','==',userId).get()
+        query.forEach(obj => {
+           console.log( obj.data());
+           userMeasures.push(obj.data() as UserMeasures)
+        })
+        
+        return userMeasures[userMeasures.length-1];
     }
 }
