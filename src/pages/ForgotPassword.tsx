@@ -13,11 +13,23 @@ import { firestore } from "../firebase";
 import { USERS } from "../data/collections";
 import { User } from "../interfaces/User";
 
+import { Snackbar } from '@material-ui/core';
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+
 function ForgotPassword () {
 
     const [email,setEmail] = useState('');
-    const [open, setOpen] = useState(false);
+    const [openSucess, setOpenSucess] = useState(false);
+    const [openError, setOpenError] = useState(false);
 
+    function Alert(props: AlertProps) {
+        return <MuiAlert elevation={6} variant="filled" {...props} />;
+      }
+
+      const handleClose = () => {
+        setOpenSucess(false);
+        setOpenError(false);
+      };
 
     const handleGetPassword = (event:ChangeEvent<HTMLInputElement | HTMLTextAreaElement >) =>{
         let field = event.target.value;
@@ -27,8 +39,6 @@ function ForgotPassword () {
     const cleanEmail = () => { 
         setEmail('');
     }
-
-
 
     const findByEmail = async (email: string) => {
        
@@ -42,14 +52,13 @@ function ForgotPassword () {
            users.push(obj.data() as User)
         })
         
-        if(users[0] !== undefined){           
-            setOpen(true);
-            alert("email nao localizado")
-        } else{
-            alert("senha enviada via email")
+        if(users[0] === undefined){
+            setOpenError(true);
+        } else {
+            setOpenSucess(true);
+            cleanEmail()
         }
     }
-
 
     return (
         <Grid
@@ -64,6 +73,18 @@ function ForgotPassword () {
                             <Typography variant="h4" component="h2" align="center">
                                 Recuperando senha
                             </Typography>  
+                        </div>
+                        <div>
+                            <Snackbar open={openSucess} autoHideDuration={6000} onClose={handleClose}>
+                                <Alert color="success">
+                                    Foi encaminhado um email para redefinir sua senha
+                                </Alert>
+                            </Snackbar>
+                            <Snackbar open={openError} autoHideDuration={6000} onClose={handleClose}>
+                                <Alert color="error">
+                                    Email não encontrado
+                                </Alert>
+                            </Snackbar>
                         </div>
                         <form>
                         <div style={{display:"flex" , flexDirection:"column"}}>
