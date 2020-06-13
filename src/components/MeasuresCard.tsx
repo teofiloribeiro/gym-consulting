@@ -113,8 +113,8 @@ const MeasuresCard = (props: any) => {
                             </CardActionArea>
                         </Grid>
                         <Grid item>
-                            <TextField id="input-with-icon-grid" name="weight" label="Peso"  
-                            InputProps={{ disableUnderline: true}} value={props.weight} onChange={props.onWeightHandleChange}/>
+                            <TextField id="input-with-icon-grid" name="weight" label="Peso"  InputProps={{ disableUnderline: true}}
+                               value={props.weight} onChange={props.weightHandleChange}/>
                         </Grid> 
                     </Grid>
 
@@ -126,8 +126,8 @@ const MeasuresCard = (props: any) => {
                                         title="Histórico de altura" />
                         </Grid>
                         <Grid item>
-                            <TextField id="input-with-icon-grid" name="height" label="Altura"
-                             InputProps={{ disableUnderline: true}} value={props.height} onChange={props.onHeightHandleChange} />
+                            <TextField id="input-with-icon-grid" name="height" label="Altura" InputProps={{ disableUnderline: true}} 
+                            value={props.height} onChange={props.heightHandleChange} />
                         </Grid>
                     </Grid>
 

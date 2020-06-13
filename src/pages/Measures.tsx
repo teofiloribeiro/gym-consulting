@@ -1,27 +1,53 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import "./Login.scss"
 
 import { Grid } from '@material-ui/core';
 import MeasuresCard from '../components/MeasuresCard';
 import { withRouter } from 'react-router-dom';
-import { register, updateUser } from '../auth/AuthService';
-import { User, UserRole } from '../interfaces/User';
 import { UserMeasures } from '../interfaces/UserMeasures';
-
 import UserMeasuresService from '../services/UserMeasuresService';
-import { useContext } from 'react';
-import { AuthContext } from '../auth/AuthContext';
+import { auth} from "../firebase";
 
-export const Profile = withRouter (({ history })=>{
+export const  Measures =  withRouter ( ({ history })=>{
 
     const userMeasuresService: UserMeasuresService = new UserMeasuresService();
-  
+
+    const [height, setHeight] = useState<Number | undefined>(0);
+
+    const [weight, setWeight] = useState<Number | undefined>(0);
+
+    const weightHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setWeight(event.target.value as Number);
+    };
+
+    const heightHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setHeight(event.target.value as Number);
+    };
+
+    const [userId, setUserId] = useState<string | undefined>();
+
+    const [userMeasures, setUserMeasures] = useState<UserMeasures>({
+        height: 0,
+        weight: 0
+    });
+
+    useEffect(() => {
+    
+        const getUserMeasures = async (id?: string) => {
+            let response = await userMeasuresService.findByUserId(id);
+            setUserMeasures(response || userMeasures)
+            setWeight(response.weight);
+            setHeight(response.height);
+        }
+        getUserMeasures(auth.currentUser?.uid);
+    },[userId]); 
+
     const onSubmit = useCallback(
          async (event:any) => {
             event.preventDefault();
             const { weight, height } = event.target.elements;
 
-          
+            
             const userMeasures: UserMeasures = {
                 weight: weight.value,
                 height: height.value,
@@ -39,11 +65,13 @@ export const Profile = withRouter (({ history })=>{
             alignItems="center"
             className="cardContainer">
             <Grid item xs={12} md={6} lg={4} >
-                <MeasuresCard onSubmit={(event: Event) => onSubmit(event)}/>
+                <MeasuresCard weight={weight} weightHandleChange={weightHandleChange}
+                 height={height} heightHandleChange={heightHandleChange}
+                 userMeasures={userMeasures} onSubmit={(event: Event) => onSubmit(event)}/>
             </Grid>
         </Grid>
     );
    
 })
 
-export default Profile;
+export default Measures;
