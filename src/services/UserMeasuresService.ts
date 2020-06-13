@@ -1,9 +1,6 @@
 import UserMeasuresData from "../data/UserMeasuresData";
 import { UserMeasures } from '../interfaces/UserMeasures';
 
-import { useContext } from 'react';
-import { AuthContext } from '../auth/AuthContext';
-
 import { auth} from "../firebase";
 
 export default class UserMeasuresService {
@@ -15,6 +12,7 @@ export default class UserMeasuresService {
     
     create(userMeasures: UserMeasures){
         userMeasures.id = new Date().getTime().toString();
+        userMeasures.dateTimeCreation = new Date();
         userMeasures.userId = auth.currentUser?.uid;
         this.UserMeasuresData.create(userMeasures);
     }

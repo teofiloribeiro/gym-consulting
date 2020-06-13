@@ -36,8 +36,8 @@ export const  Measures =  withRouter ( ({ history })=>{
         const getUserMeasures = async (id?: string) => {
             let response = await userMeasuresService.findByUserId(id);
             setUserMeasures(response || userMeasures)
-            setWeight(response.weight);
-            setHeight(response.height);
+            setWeight(response != null ? response.weight: 0);
+            setHeight(response != null ? response.height: 0);
         }
         getUserMeasures(auth.currentUser?.uid);
     },[userId]); 
