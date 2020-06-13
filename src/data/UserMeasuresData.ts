@@ -1,6 +1,4 @@
 import { firestore } from "../firebase";
-import { Diet } from "../interfaces/Diet";
-import { UserRole, User } from "../interfaces/User";
 import { MEASURES } from "./collections";
 import { UserMeasures } from '../interfaces/UserMeasures';
 
