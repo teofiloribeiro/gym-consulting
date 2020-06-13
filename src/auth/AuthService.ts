@@ -69,7 +69,7 @@ export const findUserById = async (id?: string)  => {
 
 export const updateUser = async (user: User) => {
     try{
-        const res =  await auth.currentUser;
+        const res = await auth.currentUser;
         user.id = res?.uid;
         const userRef = firestore.doc(`users/${user.id}`);
         await userRef.update({ user });

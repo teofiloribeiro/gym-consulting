@@ -17,6 +17,7 @@ import Advice from './pages/Advice'
 import Diet from './pages/Diet';
 import Measures from './pages/Measures'
 import { Users } from './pages/Users';
+import Training from './pages/Training';
 //import diet from "./components/diet/AddDietModal";
 
 ReactDOM.render(
@@ -33,6 +34,7 @@ ReactDOM.render(
         <PrivateRouter path="/Measures" exact= {true} component={Measures}/>
         <PrivateRouter path="/diet" exact={true} component={Diet}/>
         <PrivateRouter path="/users" exact={true} component={Users}/>
+        <PrivateRouter path="/Training" exact={true} component={Training}/>
         <Route path="*" component={NotFound}/>
       </Switch>
     </BrowserRouter>
