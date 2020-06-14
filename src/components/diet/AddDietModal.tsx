@@ -137,7 +137,7 @@ const Form = (props: any) => {
     }
 
     const addItemHandle = () => {
-        if(!(item && nutrient && qty < 1 && time && measure)) return;
+        if(!(item && nutrient && qty >= 0 && time && measure)) return;
         const newDietItem: DietItem = {
             desc: item,
             nutrient: nutrient || Nutrient.CARBOIDRATO,
