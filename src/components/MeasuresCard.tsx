@@ -81,19 +81,34 @@ const MeasuresCard = (props: any) => {
     const classes = useStyles();
 
     const [modalStyle] = React.useState(getModalStyle);
-    const [open, setOpen] = React.useState(false);
+    const [openWeightModal, setOpenWeightModal] = React.useState(false);
+    const [openHeightModal, setOpenHeightModal] = React.useState(false);
 
-    const handleOpen = () => {
-        setOpen(true);
+    const handleOpenWeightModal = () => {
+        setOpenWeightModal(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleCloseWeightModal = () => {
+        setOpenWeightModal(false);
     };
 
-    const body = (
+    const handleOpenHeightModal = () => {
+        setOpenHeightModal(true);
+    };
+
+    const handleCloseHeightModal = () => {
+        setOpenHeightModal(false);
+    };
+
+    const bodyWeightModal = (
         <div style={modalStyle} className={classes.paper}>
-        < SplineChart dataPoints={dataPoints} />
+        < SplineChart titleText={'Histórico de peso'} axisYsuffix={'Kg'} dataPoints={dataPoints} />
+        </div>
+    );
+
+    const bodyHeightModal = (
+        <div style={modalStyle} className={classes.paper}>
+        < SplineChart titleText={'Histórico de altura'}  axisYsuffix={'cm'} dataPoints={dataPoints} />
         </div>
     );
 
@@ -101,10 +116,16 @@ const MeasuresCard = (props: any) => {
         <Card> 
             <CardContent >
                 <Modal
-                    open={open}
-                    onClose={handleClose}
+                    open={openWeightModal}
+                    onClose={handleCloseWeightModal}
                 >
-                    {body}
+                    {bodyWeightModal}
+                </Modal>
+                <Modal
+                    open={openHeightModal}
+                    onClose={handleCloseHeightModal}
+                >
+                    {bodyHeightModal}
                 </Modal>
                 <form className="registerForm" onSubmit= {props.onSubmit}>
                 <Grid container
@@ -123,7 +144,7 @@ const MeasuresCard = (props: any) => {
 
                     <Grid container spacing={1} alignItems="flex-end">
                         <Grid item>
-                            <CardActionArea  onClick={handleOpen}>
+                            <CardActionArea  onClick={handleOpenWeightModal}>
                                 <CardMedia className={classes.iconSize}
                                                 component="img"
                                                 image={weightIcon}
@@ -138,10 +159,12 @@ const MeasuresCard = (props: any) => {
 
                     <Grid container spacing={1} alignItems="flex-end">
                         <Grid item>
-                        <CardMedia className={classes.iconSize}
+                        <CardActionArea  onClick={handleOpenHeightModal}>
+                            <CardMedia className={classes.iconSize}
                                         component="img"
                                         image={heightIcon}
                                         title="Histórico de altura" />
+                            </CardActionArea>
                         </Grid>
                         <Grid item>
                             <TextField id="input-with-icon-grid" name="height" label="Altura" InputProps={{ disableUnderline: true}} 
@@ -151,11 +174,13 @@ const MeasuresCard = (props: any) => {
 
                     <Grid container spacing={1} alignItems="flex-end">
                         <Grid item>
-                        <CardMedia className={classes.iconSize}
-                                        component="img"
-                                        image={waistIcon}
-                                        title="teste" />
-                        </Grid>
+                            <CardActionArea  onClick={handleOpenHeightModal}>
+                                <CardMedia className={classes.iconSize}
+                                                component="img"
+                                                image={waistIcon}
+                                                title="teste" />
+                            </CardActionArea>
+                        </Grid>          
                         <Grid item>
                             <TextField id="input-with-icon-grid" label="Cintura"
                              InputProps={{ disableUnderline: true}} />

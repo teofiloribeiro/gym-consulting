@@ -6,25 +6,23 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const SplineChart = (props: any) => {
 
-		let dataPointsList = props.dataPoints;
-
 		const options = {
 			animationEnabled: true,
 			title:{
-				text: "Histórico de peso"
+				text: props.titleText
 			},
 			axisX: {
 				valueFormatString: "MMM"
 			},
 			axisY: {
-				suffix:"Kg",
+				suffix:props.axisYsuffix,
 				includeZero: false
 			},
 			data: [{
 				yValueFormatString: "#,###Kg",
 				xValueFormatString: "MMMM",
 				type: "spline",
-				dataPoints: dataPointsList
+				dataPoints: props.dataPoints
 				
 			}]
 		}
