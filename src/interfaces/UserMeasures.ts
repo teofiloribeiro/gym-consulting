@@ -1,7 +1,7 @@
 export interface UserMeasures {
     id?: string;
     userId?: string;
-    dateTimeCreation?: Date;
+    dateTimeCreation: Date;
     weight: number;
     height: number;
 }

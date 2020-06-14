@@ -27,6 +27,7 @@ export const  Measures =  withRouter ( ({ history })=>{
     const [userId, setUserId] = useState<string | undefined>();
 
     const [userMeasures, setUserMeasures] = useState<UserMeasures>({
+        dateTimeCreation: new Date(),
         height: 0,
         weight: 0
     });
@@ -49,6 +50,7 @@ export const  Measures =  withRouter ( ({ history })=>{
 
             
             const userMeasures: UserMeasures = {
+                dateTimeCreation: new Date(),
                 weight: weight.value,
                 height: height.value,
             }

@@ -11,6 +11,8 @@ import Paper from '@material-ui/core/Paper'
 import { AuthContext } from "../../auth/AuthContext";
 import { UserRole } from "../../interfaces/User";
 
+import { Training, Exercise, ChargeType, Level } from "../../interfaces/training";
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         modal: {
@@ -46,8 +48,8 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export const AddDietModal = (props: any) => {
-    const { newDietHandler, dietData } = props;
+export const AddTrainingModal = (props: any) => {
+    const { newTrainingHandler, trainingData } = props;
     
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
@@ -64,7 +66,7 @@ export const AddDietModal = (props: any) => {
 
     return (
         <div>
-            {authUser?.role != UserRole.STUDENT ? <Button variant="contained" color="primary" onClick={handleOpen}> Alterar / Adicionar Dieta </Button> : null}
+            {authUser?.role != UserRole.STUDENT ? <Button variant="contained" color="primary" onClick={handleOpen}> Alterar / ADICIONAR NOVA FICHA </Button> : null}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -77,79 +79,83 @@ export const AddDietModal = (props: any) => {
                     timeout: 500,
                 }}>
 
-                <Form open={open} newDietHandler={newDietHandler} dietData = {dietData} user = {props.user}/>
+                <Form open={open} newTrainingHandler={newTrainingHandler} trainingData = {trainingData} user = {props.user}/>
             </Modal>
         </div>
     );
 }
 
 const Form = (props: any) => {
-    const { open, newDietHandler, dietData} = props;
+    const { open, newTrainingHandler, trainingData} = props;
 
     const classes = useStyles();
-    const [nutrient, setNutrient] = useState<Nutrient>();
-    const [measure, setMeasure] = useState<Measure>();
-    const [title, setTitle] = useState<string>(dietData.title || '');
-    const [time, setTime] = useState<string>('');
-    const [item, setItem] = useState<string>('');
-    const [qty, setQty] = useState<number>(0);
 
-    const [dietItens, setDietItens] = useState<DietItem[]>(dietData.itens || []);
+    const [chargeType, setChargeType] = useState<ChargeType>();
+    const [set, setSet] = useState<number>(1);
+    const [rep, setRep] = useState<number>(1);
+    const [desc, setDesc] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [title, setTitle] = useState<string>(trainingData.title||'');
+    
+    const [exerciseItens, setExerciseItens] = useState<Exercise[]>(trainingData.itens || []);
 
-    const nutrientHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setNutrient(event.target.value as Nutrient);
+    const chargeTypeHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setChargeType(event.target.value as ChargeType);
     };
 
-    const measureHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setMeasure(event.target.value as Measure);
+    const setHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setSet(event.target.value as number);
+    };
+
+    const repHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setRep(event.target.value as number);
+    };
+
+    const descHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setDesc(event.target.value as string);
+    };
+
+    const nameHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setName(event.target.value as string);
     };
 
     const titleHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         setTitle(event.target.value as string);
     };
 
-    const timeHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setTime(event.target.value as string);
-    };
-
-    const itemHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setItem(event.target.value as string);
-    };
-
-    const qtyHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setQty(event.target.value as number);
-    };
-
     const removeItem = (index: number) => {
-        dietItens.splice(index, 1);
-        setDietItens(dietItens);
+        exerciseItens.splice(index, 1);
+        setExerciseItens(exerciseItens);
     }
 
     const saveHandle = () => {
-        const newDiet: Diet = {
+        const newTraining: Training = {
             userId: props.user,
             title: title,
-            itens: dietItens,
-            id: dietData.id
+            itens: exerciseItens,
+            level : Level.INICIANTE,
+            id: trainingData.id
         }
-        console.log(newDiet);
-        newDietHandler(newDiet)
+        console.log(newTraining);
+        newTrainingHandler(newTraining);
     }
 
     const addItemHandle = () => {
-        if(!(item && nutrient && qty >= 0 && time && measure)) return;
-        const newDietItem: DietItem = {
-            desc: item,
-            nutrient: nutrient || Nutrient.CARBOIDRATO,
-            qty: qty,
-            time: time,
-            measure: measure || Measure.KG
+        if(!(name && chargeType && rep < 1 && set < 1 && desc)) return;
+        const newExerciseItem: Exercise = {
+            name: name,
+            charge: chargeType || ChargeType.LEVE,
+            rep: rep,
+            set:set,
+            desc:desc 
         }
 
-        setDietItens([...dietItens, newDietItem]);
-        setItem('');
-        setTime('');
-        setQty(1);
+        setExerciseItens([... exerciseItens, newExerciseItem]);
+        setName('');
+        setChargeType(ChargeType.LEVE);
+        setRep(1);
+        setSet(1);
+        setDesc('');
     };
 
     return (
@@ -158,7 +164,7 @@ const Form = (props: any) => {
                 direction="column"
                 justify="center"
                 className={classes.paper}>
-                <h2>Nova Dieta</h2>
+                <h2>Nova Ficha</h2>
                 <FormControl fullWidth >
                     <TextField
                         id="title"
@@ -173,65 +179,64 @@ const Form = (props: any) => {
                     <FormControl className={classes.formControl}>
                         <TextField
                             error={false}
-                            id="time"
-                            label="Horario"
+                            id="name"
+                            label="Name"
                             helperText="*"
-                            onChange={timeHandleChange}
-                            value={time}
+                            onChange={nameHandleChange}
+                            value={name}
                         />
                     </FormControl>
                     <FormControl className={classes.formControl}>
                         <TextField
                             error={false}
-                            id="item"
-                            label="Item"
+                            id="desc"
+                            label="Descrição"
                             helperText="*"
-                            onChange={itemHandleChange}
-                            value={item}
+                            onChange={descHandleChange}
+                            value={desc}
                         />
                     </FormControl>
                 </div>
                 <div>
                     <FormControl className={classes.formControl}>
-                        <InputLabel id="nutrient-select">Nutriente</InputLabel>
+                        <InputLabel id="nutrient-select">Carga</InputLabel>
                         <Select
                             required
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={nutrient}
-                            onChange={nutrientHandleChange}
+                            value={chargeType}
+                            onChange={chargeTypeHandleChange}
                         >
-                            {nutrientList()}
+                            {chargeTypeList()} 
                         </Select>
                     </FormControl>
                     <FormControl className={classes.formControl}>
                         <TextField
                             required
                             error={false}
-                            id="qty"
-                            label="Quantidade"
+                            id="set"
+                            label="Series"
                             helperText="*"
-                            onChange={qtyHandleChange}
-                            value={qty}
+                            onChange={setHandleChange}
+                            value={set}
                         />
                     </FormControl>
                     <FormControl className={classes.formControl}>
-                        <InputLabel id="nutrient-select">Medida</InputLabel>
-                        <Select
+                        <TextField
                             required
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={measure}
-                            onChange={measureHandleChange}
-                        >
-                            {measureList()}
-                        </Select>
+                            error={false}
+                            id="rep"
+                            label="Repetições"
+                            helperText="*"
+                            onChange={repHandleChange}
+                            value={rep}
+                        />
                     </FormControl>
                     <IconButton onClick={addItemHandle}>
                         <AddIcon fontSize="large" />
                     </IconButton>
                 </div>
-                <DietItensTable dietData={dietItens} onRemove={removeItem} />
+                <TrainingItensTable dietData={exerciseItens} onRemove={removeItem} />
                 <FormControl className={classes.formControl}>
                     <Button variant="contained" color="primary" onClick={saveHandle}>
                         Salvar
@@ -242,25 +247,26 @@ const Form = (props: any) => {
     )
 }
 
-export const DietItensTable = (props: any) => {
+export const TrainingItensTable = (props: any) => {
     const classes = useStyles();
-    const { dietData, onRemove } = props;
-    console.log('from diet', dietData)
+    const { trainingData, onRemove } = props;
+    console.log('from Training', trainingData)
     return (
         <TableContainer component={Paper} className={classes.tableContainer}>
-            {Array.isArray(dietData) && dietData.length ? <Table className={classes.table} size="small" aria-label="a dense table">
+            {Array.isArray(trainingData) && trainingData.length ? <Table className={classes.table} size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>
-                        <TableCell className={classes.headerText}>Horario</TableCell>
-                        <TableCell align="center" className={classes.headerText}>Item</TableCell>
-                        <TableCell align="center" className={classes.headerText}> Tipo de Nutriente</TableCell>
-                        <TableCell align="center" className={classes.headerText}>Quantidade</TableCell>
-                        <TableCell align="center" className={classes.headerText}>Medida</TableCell>
+                        <TableCell className={classes.headerText}>Titulo</TableCell>
+                        <TableCell align="center" className={classes.headerText}>Nome</TableCell>
+                        <TableCell align="center" className={classes.headerText}>Descrição</TableCell>
+                        <TableCell align="center" className={classes.headerText}>Carga</TableCell>
+                        <TableCell align="center" className={classes.headerText}>Series</TableCell>
+                        <TableCell align="center" className={classes.headerText}>Repetições</TableCell>
                         {onRemove ? <TableCell align="center" className={classes.headerText}>Remover</TableCell> : null}
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {tableRows(dietData, onRemove)}
+                    {tableRows(trainingData, onRemove)}
                 </TableBody>
             </Table> : <EmptyTable/> }
         </TableContainer>
@@ -272,17 +278,17 @@ const EmptyTable = () => {
     return <h2 className={classes.emptyTableText}> Nenhuma dieta por aqui ainda...</h2>
 }
 
-const tableRows = (dietItens: DietItem[], removeFunc: any) => {
+const tableRows = (exerciseItens: Exercise[], removeFunc: any) => {
     const rows: any[] = [];
-    dietItens.forEach((row: DietItem, index: number) => rows.push(
+    exerciseItens.forEach((row: Exercise, index: number) => rows.push(
         <TableRow key={index}>
             <TableCell component="th" scope="row">
-                {row.time}
-            </TableCell>
+                {row.name}
+            </TableCell> 
             <TableCell align="center">{row.desc}</TableCell>
-            <TableCell align="center">{row.nutrient}</TableCell>
-            <TableCell align="center">{row.qty}</TableCell>
-            <TableCell align="center">{row.measure}</TableCell>
+            <TableCell align="center">{row.rep}</TableCell>
+            <TableCell align="center">{row.set}</TableCell>
+            <TableCell align="center">{row.charge}</TableCell>
             {removeFunc ? <TableCell  align="center">
                 <IconButton onClick={ () => removeFunc(index) }>
                     <DeleteIcon fontSize="large" />
@@ -294,9 +300,9 @@ const tableRows = (dietItens: DietItem[], removeFunc: any) => {
 }
 
 
-const nutrientList = () => {
+const chargeTypeList = () => {
     const itens = [];
-    for (let item in Nutrient) {
+    for (let item in ChargeType) {
         if (isNaN(Number(item))) {
             itens.push(
                 <MenuItem value={item}>{item}</MenuItem>
@@ -306,9 +312,9 @@ const nutrientList = () => {
     return itens;
 }
 
-const measureList = () => {
+const LevelList = () => {
     const itens = [];
-    for (let item in Measure) {
+    for (let item in Level) {
         if (isNaN(Number(item))) {
             itens.push(
                 <MenuItem value={item}>{item}</MenuItem>
