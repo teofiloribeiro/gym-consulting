@@ -26,4 +26,15 @@ export default class UserMeasuresService {
         }
         return await this.UserMeasuresData.findByUserId(userId);
     }
+
+    findAllByUserId = async (userId?: string) => {
+        if(!userId){
+            return {
+               height:0,
+               weight:0,
+            } as UserMeasures 
+        }
+        return await this.UserMeasuresData.findAllByUserId(userId);
+    }
+    
 }

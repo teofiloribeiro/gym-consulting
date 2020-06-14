@@ -6,9 +6,6 @@ import {USERS} from './collections'
 
 export default class NutricionistData {
 
-
-
-
     consulta = async () => {
         const nutriUsers: User[] = [];
         const userRef = firestore.collection(USERS)
