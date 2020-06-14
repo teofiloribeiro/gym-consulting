@@ -34,6 +34,10 @@ export default class StartMenu extends Component {
     onSubmitMeasures = () => {
         this.setState({ gotoMeasuresPage: true})
     }
+    
+    onSubmitTraning = () => {
+        this.setState({ gotoTraningPage: true})
+    }
 
     render() {
         if (this.state.gotoDietPage) {
@@ -41,7 +45,7 @@ export default class StartMenu extends Component {
         }else if(this.state.gotoMeasuresPage){
             return <Redirect to="/Measures" />
         }else if(this.state.gotoTraningPage){
-            return <Redirect to="/Traning" />
+            return <Redirect to="/Training" />
         }else if(this.state.gotoAdvicePage){
             return <Redirect to="/Advice" />
         }
@@ -64,7 +68,7 @@ export default class StartMenu extends Component {
                 title={"Treino"}
                 img={traningImg}
                 description={"Os treinos são essenciais para a saúde,perda de gordura e o guanho de massa magra."}
-                onSubmit={this.onSubmit} />
+                onSubmit={this.onSubmitTraning} />
                 
             <StartMenuCard
                 title={"Medidas"}
