@@ -9,6 +9,7 @@ export const Users = withRouter(({history}) => {
     const classes = useStyles();
     const [users, setUsers] = useState<User[]>([]);
     const onDietHandler = (userId: string) => history.push({pathname: '/diet', state: userId });
+    const onTrainingHandler = (userId: string) => history.push({pathname: '/Training', state: userId });
     
     useEffect(() => {
         const getStudents = async () => {
@@ -21,7 +22,7 @@ export const Users = withRouter(({history}) => {
 
     return (
         <div className = {classes.listContainer}>
-            <UsersList onDiet = {onDietHandler} users = {users}  />
+            <UsersList onDiet = {onDietHandler} onTraining={onTrainingHandler} users = {users}  />
         </div>
     ) 
 })
