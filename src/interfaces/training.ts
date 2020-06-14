@@ -15,7 +15,7 @@ export interface Exercise {
 }   
 
 export enum ChargeType {
-    LEVE, MODERADO, CONCENTRADO, EXCEDENTE
+    LEVE, MODERADO, EXCEDENTE
 }
 
 export enum Level {
