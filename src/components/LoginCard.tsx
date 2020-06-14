@@ -31,12 +31,19 @@ const LoginCard = (props: any) => {
                         </Grid>
                     </form>
                     <Grid container
-                        direction="row"
-                        justify="space-between"
-                        alignItems="center">
+                        //direction="row"
+                        direction="column"
+                        //justify="space-between"
+                        justify="center"
+                        alignItems="center"
+                        >
 
-                        <Link to="/register" className="link">Cadastrar</Link>
-                        <Link to="forgot_password" className="link">Esqueci minha senha</Link>
+                        <Link to="/register" className="link" style={{marginTop:"5px"}}>
+                            <Button variant="outlined">cadastrar</Button>
+                        </Link>
+                        <Link to="forgot_password" className="link"  style={{marginTop:"5px"}}>
+                            <Button variant="outlined">Esqueci minha senha</Button>
+                        </Link>
                     </Grid>
                 </Grid>
             </CardContent>
