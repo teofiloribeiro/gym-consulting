@@ -19,7 +19,7 @@ const SplineChart = (props: any) => {
 				includeZero: false
 			},
 			data: [{
-				yValueFormatString: "#,###Kg",
+				yValueFormatString: props.yValueFormatString,
 				xValueFormatString: "MMMM",
 				type: "spline",
 				dataPoints: props.dataPoints

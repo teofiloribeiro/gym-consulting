@@ -22,6 +22,7 @@ import SplineChart from './SplineChart';
 
 import UserMeasuresData from '../data/UserMeasuresData';
 import  DataPoints  from '../util/DataPoints';
+import {MeasuresType} from '../interfaces/UserMeasures'
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -66,16 +67,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MeasuresCard = (props: any) => {
 
-    const [dataPoints, setDataPoints] = useState<DataPoints[]>([])
+    const [weightDataPoints, setWeightDataPoints] = useState<DataPoints[]>([])
+    const [heightDataPoints, setHeightDataPoints] = useState<DataPoints[]>([])
        
     useEffect(() => {
         const userMeasuresData = new UserMeasuresData();
         const getUserMeasures = async () => {
-            let response =  await userMeasuresData.getDataPoints(auth.currentUser?.uid);
-            setDataPoints(response)
+            setWeightDataPoints( await userMeasuresData.getDataPoints(auth.currentUser?.uid, MeasuresType.WEIGHT));
+            setHeightDataPoints( await userMeasuresData.getDataPoints(auth.currentUser?.uid,  MeasuresType.HEIGHT))
         }
         getUserMeasures();
-        
     }, [])
 
     const classes = useStyles();
@@ -83,6 +84,7 @@ const MeasuresCard = (props: any) => {
     const [modalStyle] = React.useState(getModalStyle);
     const [openWeightModal, setOpenWeightModal] = React.useState(false);
     const [openHeightModal, setOpenHeightModal] = React.useState(false);
+    const [measuresType, setMeasuresType] = useState<string>()
 
     const handleOpenWeightModal = () => {
         setOpenWeightModal(true);
@@ -102,13 +104,15 @@ const MeasuresCard = (props: any) => {
 
     const bodyWeightModal = (
         <div style={modalStyle} className={classes.paper}>
-        < SplineChart titleText={'Histórico de peso'} axisYsuffix={'Kg'} dataPoints={dataPoints} />
+        < SplineChart titleText={'Histórico de peso'} axisYsuffix={'Kg'} 
+            yValueFormatString={'#,###Kg'} dataPoints={weightDataPoints} />
         </div>
     );
 
     const bodyHeightModal = (
         <div style={modalStyle} className={classes.paper}>
-        < SplineChart titleText={'Histórico de altura'}  axisYsuffix={'cm'} dataPoints={dataPoints} />
+        < SplineChart titleText={'Histórico de altura'}  axisYsuffix={'cm'}
+            yValueFormatString={'#,###cm'} dataPoints={heightDataPoints} />
         </div>
     );
 

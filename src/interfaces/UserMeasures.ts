@@ -5,3 +5,9 @@ export interface UserMeasures {
     weight: number;
     height: number;
 }
+
+
+export enum MeasuresType {
+    WEIGHT = "WEIGHT",
+    HEIGHT = "HEIGHT"
+}
