@@ -4,7 +4,6 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Grid, TextField, FormControl, InputLabel, MenuItem, Select, Menu, IconButton, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button } from "@material-ui/core";
-import { Nutrient, Measure, DietItem, Diet } from "../../interfaces/Diet";
 import AddIcon from '@material-ui/icons/AddCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Paper from '@material-ui/core/Paper'
@@ -141,7 +140,7 @@ const Form = (props: any) => {
     }
 
     const addItemHandle = () => {
-        if(!(name && chargeType && rep < 1 && set < 1 && desc)) return;
+        if(!(name && chargeType && rep >= 0 && set >= 0 && desc)) return;
         const newExerciseItem: Exercise = {
             name: name,
             charge: chargeType || ChargeType.LEVE,
@@ -236,7 +235,7 @@ const Form = (props: any) => {
                         <AddIcon fontSize="large" />
                     </IconButton>
                 </div>
-                <TrainingItensTable dietData={exerciseItens} onRemove={removeItem} />
+                <TrainingItensTable trainingData={exerciseItens} onRemove={removeItem} />
                 <FormControl className={classes.formControl}>
                     <Button variant="contained" color="primary" onClick={saveHandle}>
                         Salvar
@@ -256,7 +255,6 @@ export const TrainingItensTable = (props: any) => {
             {Array.isArray(trainingData) && trainingData.length ? <Table className={classes.table} size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>
-                        <TableCell className={classes.headerText}>Titulo</TableCell>
                         <TableCell align="center" className={classes.headerText}>Nome</TableCell>
                         <TableCell align="center" className={classes.headerText}>Descrição</TableCell>
                         <TableCell align="center" className={classes.headerText}>Carga</TableCell>
@@ -275,7 +273,7 @@ export const TrainingItensTable = (props: any) => {
 
 const EmptyTable = () => {
     const classes = useStyles();
-    return <h2 className={classes.emptyTableText}> Nenhuma dieta por aqui ainda...</h2>
+    return <h2 className={classes.emptyTableText}> Nenhuma Ficha por aqui ainda...</h2>
 }
 
 const tableRows = (exerciseItens: Exercise[], removeFunc: any) => {

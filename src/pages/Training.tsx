@@ -53,7 +53,7 @@ const TrainingPage = withRouter (({ history }) => {
 
     return (
         <div className={classes.container}>
-                <AddTrainingModal newDietHandler={newTrainingHandler} user={trainingUserId} trainingData={training}/>
+                <AddTrainingModal newTrainingHandler={newTrainingHandler} user={trainingUserId} trainingData={training}/>
             <div>
                 <TrainingItensTable trainingData={training.itens}/>
             </div>

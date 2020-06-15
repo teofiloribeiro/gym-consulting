@@ -1,4 +1,4 @@
-import React , { useState, useEffect ,ChangeEvent} from 'react';
+import  React , { useState, useEffect ,ChangeEvent} from 'react';
 
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -9,7 +9,7 @@ import SubdirectoryArrowLeftIcon from '@material-ui/icons/SubdirectoryArrowLeft'
 import CancelIcon from '@material-ui/icons/Cancel';
 import { Link } from 'react-router-dom';
 
-import { firestore } from "../firebase";
+import { firestore,auth } from "../firebase";
 import { USERS } from "../data/collections";
 import { User } from "../interfaces/User";
 
@@ -56,6 +56,10 @@ function ForgotPassword () {
             setOpenError(true);
         } else {
             setOpenSucess(true);
+            auth.sendPasswordResetEmail(email).then(function(){
+            }).catch(function(erro){
+                console.log("deu ruim")
+            });
             cleanEmail()
         }
     }
