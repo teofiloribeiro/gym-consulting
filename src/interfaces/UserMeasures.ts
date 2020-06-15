@@ -4,10 +4,20 @@ export interface UserMeasures {
     dateTimeCreation: Date;
     weight: number;
     height: number;
+    waist: number;
+    arm: number;
+    chest: number
+    thigh: number;
+    calf: number;
 }
 
 
 export enum MeasuresType {
     WEIGHT = "WEIGHT",
-    HEIGHT = "HEIGHT"
+    HEIGHT = "HEIGHT",
+    WAIST = "WAIST",
+    ARM = "ARM",
+    CHEST = "CHEST",
+    THIGH = "THIGH",
+    CALF = "CALF"
 }
