@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) =>
         minWidth: 20,
     },
     iconSize: {
-        width: 30,
+        width: 38,
         minWidth: 10,
     },
     selectEmpty: {
@@ -74,12 +74,23 @@ const MeasuresCard = (props: any) => {
 
     const [weightDataPoints, setWeightDataPoints] = useState<DataPoints[]>([])
     const [heightDataPoints, setHeightDataPoints] = useState<DataPoints[]>([])
-       
+    const [waistDataPoints, setWaistDataPoints] = useState<DataPoints[]>([])
+    const [armtDataPoints, setArmDataPoints] = useState<DataPoints[]>([])
+    const [chestDataPoints, setChestDataPoints] = useState<DataPoints[]>([])
+    const [thighDataPoints, setThighDataPoints] = useState<DataPoints[]>([])
+    const [calfDataPoints, setCalfDataPoints] = useState<DataPoints[]>([])
+
     useEffect(() => {
         const userMeasuresData = new UserMeasuresData();
         const getUserMeasures = async () => {
             setWeightDataPoints( await userMeasuresData.getDataPoints(auth.currentUser?.uid, MeasuresType.WEIGHT));
-            setHeightDataPoints( await userMeasuresData.getDataPoints(auth.currentUser?.uid,  MeasuresType.HEIGHT))
+            setHeightDataPoints( await userMeasuresData.getDataPoints(auth.currentUser?.uid,  MeasuresType.HEIGHT));
+            setWaistDataPoints( await userMeasuresData.getDataPoints(auth.currentUser?.uid,  MeasuresType.WAIST));
+            setArmDataPoints( await userMeasuresData.getDataPoints(auth.currentUser?.uid,  MeasuresType.ARM));
+            setChestDataPoints( await userMeasuresData.getDataPoints(auth.currentUser?.uid,  MeasuresType.CHEST));
+            setThighDataPoints( await userMeasuresData.getDataPoints(auth.currentUser?.uid,  MeasuresType.THIGH));
+            setCalfDataPoints( await userMeasuresData.getDataPoints(auth.currentUser?.uid,  MeasuresType.CALF));
+
         }
         getUserMeasures();
     }, [])
@@ -170,35 +181,35 @@ const MeasuresCard = (props: any) => {
     const bodyWaistModal = (
         <div style={modalStyle} className={classes.paper}>
         < SplineChart titleText={'Histórico da cintura'}  axisYsuffix={'cm'}
-            yValueFormatString={'#,###cm'} dataPoints={heightDataPoints} />
+            yValueFormatString={'#,###cm'} dataPoints={waistDataPoints} />
         </div>
     );
 
     const bodyArmModal = (
         <div style={modalStyle} className={classes.paper}>
         < SplineChart titleText={'Histórico do braço'}  axisYsuffix={'cm'}
-            yValueFormatString={'#,###cm'} dataPoints={heightDataPoints} />
+            yValueFormatString={'#,###cm'} dataPoints={armtDataPoints} />
         </div>
     );
 
     const bodyChestModal = (
         <div style={modalStyle} className={classes.paper}>
         < SplineChart titleText={'Histórico do peito'}  axisYsuffix={'cm'}
-            yValueFormatString={'#,###cm'} dataPoints={heightDataPoints} />
+            yValueFormatString={'#,###cm'} dataPoints={chestDataPoints} />
         </div>
     );
 
     const bodyThighModal = (
         <div style={modalStyle} className={classes.paper}>
         < SplineChart titleText={'Histórico da coxa'}  axisYsuffix={'cm'}
-            yValueFormatString={'#,###cm'} dataPoints={heightDataPoints} />
+            yValueFormatString={'#,###cm'} dataPoints={thighDataPoints} />
         </div>
     );
 
     const bodyCalfModal = (
         <div style={modalStyle} className={classes.paper}>
         < SplineChart titleText={'Histórico da panturrilha'}  axisYsuffix={'cm'}
-            yValueFormatString={'#,###cm'} dataPoints={heightDataPoints} />
+            yValueFormatString={'#,###cm'} dataPoints={calfDataPoints} />
         </div>
     );
 

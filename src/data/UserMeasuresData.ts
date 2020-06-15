@@ -1,6 +1,6 @@
 import { firestore } from "../firebase";
 import { MEASURES } from "./collections";
-import { UserMeasures, MeasuresType } from '../interfaces/UserMeasures';
+import { UserMeasures } from '../interfaces/UserMeasures';
 import  DataPoints  from '../util/DataPoints';
 import { firestore as firestoreT} from "firebase";
 
@@ -53,12 +53,30 @@ export default class UserMeasuresData {
           
             data.forEach(point =>{
                 const dataPoint = new DataPoints();
+                
                 if(measuresType == 'WEIGHT') {
                     dataPoint.y = Number(point.weight);
                 }
                 else if (measuresType == 'HEIGHT'){
                     dataPoint.y = Number(point.height);
                 }
+                else if (measuresType == 'WAIST'){
+                    dataPoint.y = Number(point.waist);
+                }
+                else if (measuresType == 'ARM'){
+                    dataPoint.y = Number(point.arm);
+                }
+                else if (measuresType == 'CHEST'){
+                    dataPoint.y = Number(point.chest);
+                }
+
+                else if (measuresType == 'THIGH'){
+                    dataPoint.y = Number(point.thigh);
+                }
+                else if (measuresType == 'CALF'){
+                    dataPoint.y = Number(point.calf);
+                }
+
                 const x =  point.dateTimeCreation as unknown;
                 const y = x as firestoreT.Timestamp;
                 dataPoint.x = y.toDate();
