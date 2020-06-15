@@ -120,9 +120,12 @@ const Form = (props: any) => {
         setQty(event.target.value as number);
     };
 
-    const removeItem = (index: number) => {
+    const removeItem = async (index: number) => {
         dietItens.splice(index, 1);
-        setDietItens(dietItens);
+        await setDietItens(dietItens);
+        const old = time;
+        setTime("...");
+        setTime(old)
     }
 
     const saveHandle = () => {

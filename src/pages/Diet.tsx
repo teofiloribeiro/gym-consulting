@@ -12,11 +12,13 @@ import { Button } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		container: {
-            width: '90%',
-            flex: '',
-            alignItems: 'center',
-            marginTop: 30
-		},
+            marginTop: 30,
+            marginRight: 20,
+            marginLeft: 20,
+        },
+        table: {
+            marginTop: 15
+        }
 	})
 );
 
@@ -53,7 +55,7 @@ const DietPage = withRouter (({ history }) => {
     return (
         <div className={classes.container}>
             <AddDietModal newDietHandler={newDietHandler} user={dietUserId} dietData={diet}/>
-            <div>
+            <div className={classes.table}>
                 <DietItensTable dietData={diet.itens}/>
             </div>
         </div>

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { UsersList } from '../components/UserList';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { withRouter } from 'react-router-dom';
-import { User } from '../interfaces/User';
+import { withRouter, Redirect } from 'react-router-dom';
+import { User, UserRole } from '../interfaces/User';
 import { findAllStudents } from "../data/UserData";
+import { AuthContext } from '../auth/AuthContext';
 
 export const Users = withRouter(({history}) => {
     const classes = useStyles();
@@ -17,7 +18,13 @@ export const Users = withRouter(({history}) => {
         }   
         
         getStudents();
-    },[]); 
+    },[]);
+
+    const user = useContext(AuthContext);
+
+    if(user && user.role == UserRole.STUDENT){
+        return <Redirect to="/" push={true}/>
+    }
 
     return (
         <div className = {classes.listContainer}>
@@ -29,8 +36,8 @@ export const Users = withRouter(({history}) => {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         listContainer: {
-            width: '90%',
-            alignItems: 'center',
+            marginRight: 20,
+            marginLeft: 20,
             minHeight: '100%',
             marginTop: 40
         }

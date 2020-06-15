@@ -42,13 +42,18 @@ const MenuAppBar = withRouter(({ history }) => {
     setAnchorEl(null);
   };
 
-  const handleProfile = () => history.push('/Profile')
+  const handleProfile = () => {
+    handleClose();
+    history.push('/Profile')
+  }
+  
 
   const handleLogout = useCallback(
         async (event: any) => {
           event.preventDefault();        
           try{
               await logout();
+              handleClose();
               history.push('/login');
           }catch(error) {
               //TODO SHOW ERROR ON SCREEN

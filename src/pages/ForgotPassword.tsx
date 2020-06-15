@@ -24,7 +24,7 @@ function ForgotPassword () {
 
     function Alert(props: AlertProps) {
         return <MuiAlert elevation={6} variant="filled" {...props} />;
-      }
+    }
 
       const handleClose = () => {
         setOpenSucess(false);

@@ -1,15 +1,17 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import "./Login.scss"
 
-import { Grid } from '@material-ui/core';
+import { Grid, Snackbar } from '@material-ui/core';
 import RegisterCard from '../components/RegisterCard';
 import { withRouter } from 'react-router-dom';
-import { register } from '../auth/AuthService';
+import { register, logout } from '../auth/AuthService';
 import { User, UserRole } from '../interfaces/User';
-
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 
 export const Register = withRouter (({ history })=>{
-     
+    const [openError, setOpenError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
     const onSubmit = useCallback(
         async (event:any) => {
             event.preventDefault();
@@ -21,11 +23,28 @@ export const Register = withRouter (({ history })=>{
                 birth: parseDate(birth.value),
                 role: role.value as UserRole       
             }
-            
-            await register(user, password.value);
-            history.push('/');
+            try{
+                await register(user, password.value);
+                logout();
+                history.push('/');
+            }catch(error){
+                if(error.code === "auth/email-already-in-use"){
+                    setErrorMessage("Email já em uso!");
+                }else if(error.code === "auth/weak-password"){
+                    setErrorMessage("Senha muito fraca!");
+                }
+                setOpenError(true);
+            }
         },[history]
     )
+
+    function Alert(props: AlertProps) {
+        return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
+
+    const handleClose = () => {
+        setOpenError(false);
+    };
 
     return (
         <Grid
@@ -35,6 +54,13 @@ export const Register = withRouter (({ history })=>{
             alignItems="center"
             className="cardContainer">
             <Grid item xs={12} md={6} lg={4} >
+                <div>
+                    <Snackbar open={openError} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert color="error">
+                            {errorMessage}
+                        </Alert>
+                    </Snackbar>
+                </div>
                 <RegisterCard onSubmit={(event: Event) => onSubmit(event)} />
             </Grid>
         </Grid>
