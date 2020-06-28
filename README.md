@@ -24,12 +24,13 @@
     > npx  create-app-react nomeprojeto --scripts-version=react-scripts-ts
   
   - **Para instalar todas as dependências:** 
-   > npm install
+    > npm install
 
 ## Autores
  - Danilo Alves         [danilok16](https://github.com/danilok16)
  - Ingrid Barbosa       [IngridCBarbosa](https://github.com/IngridCBarbosa)
  - Pedro Oliveira       [pedro96h](https://github.com/pedro96h) 
  - Teófilo Ribeiro      [teofiloribeiro](https://github.com/teofiloribeiro)
+
 ## Acesse o site
 ### [Studio Body](https://bodystudio.netlify.app/)
