@@ -2,7 +2,6 @@
 
  Projeto desenvolvido para a cadeira eletiva de tópicos avançados em engenharia de software. Que tinha como objetivo o desenvolvimento de um site. 
   Então foi desenvolvido um site de consultoria de acadamia, com o objetivo de aproximar os alunos e intrutores e também com os nutricionistas, como também facilicar o acesso aos dados para os alunos.
-  - Menu Principal 
   
   ![](/src/images/menu.png)
   
@@ -19,5 +18,10 @@
   - **Para instalar todas as dependências** 
    > npm install
 
-
-## [Studio Body](https://bodystudio.netlify.app/)
+## Autores
+ - Danilo Alves         [danilok16](https://github.com/danilok16)
+ - Ingrid Barbosa       [IngridCBarbosa](https://github.com/IngridCBarbosa)
+ - Pedro Oliveira       [pedro96h](https://github.com/pedro96h) 
+ - Teófilo Ribeiro      [teofiloribeiro](https://github.com/teofiloribeiro)
+## Acesse o site
+### [Studio Body](https://bodystudio.netlify.app/)
