@@ -7,13 +7,13 @@
 ## Configuração para Desenvolvimento
  - Para desenvolver o projeto é necessário ter instalado:
   
-  1. **Instalar o node **
-  > [Node](https://nodejs.org/en/)
+  1. **Instalar o node**
+   > [Node](https://nodejs.org/en/)
   2. Criar o projeto
-  > npx  create-app-react nomeprojeto --scripts-version=react-scripts-ts
+   > npx  create-app-react nomeprojeto --scripts-version=react-scripts-ts
   
   - **Para instalar todas as dependências** 
-  > npm install
+   > npm install
 
 
 ## https://bodystudio.netlify.app/
