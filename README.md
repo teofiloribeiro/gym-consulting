@@ -12,7 +12,7 @@
   
    1. **Instalar o node**
     > [Node](https://nodejs.org/en/)
-   2. Criar o projeto
+   2. **Criar o projeto**
     > npx  create-app-react nomeprojeto --scripts-version=react-scripts-ts
   
   - **Para instalar todas as dependências** 
