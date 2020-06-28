@@ -1,9 +1,20 @@
-## Gym Consulting
+# Gym Consulting
 
-Projeto desenvolvido para a cadeira eletiva de tópicos avançados em engenharia de software.
+ Projeto desenvolvido para a cadeira eletiva de tópicos avançados em engenharia de software. Que tinha como objetivo o desenvolvimento de um site. 
+  Então foi desenvolvido um site de consultoria de acadamia, com o objetivo de aproximar os alunos e intrutores e também com os nutricionistas, como também facilicar o acesso aos dados para os alunos.
+  
+  ![](/src/images/menu.png)
 
-Foi Desenvolvido um site de consultoria de academia, onde foi utilizado framework react como frontend, firebase como banco de dados. 
+## Configuração para Desenvolvimento
+ - Para desenvolver o projeto é necessário ter instalado:
+  
+  1. **Instalar o node**
+   > [Node](https://nodejs.org/en/)
+  2. Criar o projeto
+   > npx  create-app-react nomeprojeto --scripts-version=react-scripts-ts
+  
+  - **Para instalar todas as dependências** 
+   > npm install
 
-Desenvolvido com o objetivo de o aluno interagir mais com instrutores e nutricionista, ter seu dados e avanços computados e de fácil acesso. Podendo assim melhorar o  desempenho do aluno na academia.
 
 ## https://bodystudio.netlify.app/
