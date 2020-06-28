@@ -6,6 +6,14 @@
   ![](/src/images/menu.png)
   
   ![](/src/images/menu2.gif)
+  
+## Telas 
+![](/src/images/dieta.gif)
+
+![](/src/images/treino.gif)
+
+![](/src/images/medida.gif)
+
 
 ## Configuração para Desenvolvimento
  - **Para desenvolver o projeto é necessário ter instalado:**
