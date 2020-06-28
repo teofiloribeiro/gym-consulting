@@ -12,18 +12,18 @@
 
 ![](/src/images/treino.gif)
 
-![](/src/images/medida.gif)
+![](/src/images/Medidas.gif)
 
 
 ## Configuração para Desenvolvimento
- - **Para desenvolver o projeto é necessário ter instalado:**
+ - **Para desenvolver o projeto:**
   
    1. **Instalar o node**
     > [Node](https://nodejs.org/en/)
    2. **Criar o projeto**
     > npx  create-app-react nomeprojeto --scripts-version=react-scripts-ts
   
-  - **Para instalar todas as dependências** 
+  - **Para instalar todas as dependências:** 
    > npm install
 
 ## Autores
