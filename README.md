@@ -8,12 +8,12 @@
   ![](/src/images/menu2.gif)
 
 ## Configuração para Desenvolvimento
- - Para desenvolver o projeto é necessário ter instalado:
+ - **Para desenvolver o projeto é necessário ter instalado:**
   
-  1. **Instalar o node**
-   > [Node](https://nodejs.org/en/)
-  2. Criar o projeto
-   > npx  create-app-react nomeprojeto --scripts-version=react-scripts-ts
+   1. **Instalar o node**
+    > [Node](https://nodejs.org/en/)
+   2. Criar o projeto
+    > npx  create-app-react nomeprojeto --scripts-version=react-scripts-ts
   
   - **Para instalar todas as dependências** 
    > npm install
