@@ -24,7 +24,7 @@
     "date-fns": "^2.12.0",
     "firebase": "^7.14.2",
     "jquery": "^3.3.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "notistack": "^0.9.17",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0-beta.5",
